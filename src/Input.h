@@ -29,6 +29,15 @@ class Input {
 
 void Input::getInput() {
     getline (cin, strLine);
+    size_t found = strLine.find('#');
+    if (found != string::npos) {
+        cout << "got the #" << endl;
+        strLine.erase(strLine.begin() + found, strLine.end());
+        cout << strLine << endl;
+    }
+    else {
+        cout << "tough, son" << endl;
+    }
 }
 
 // make string into array
@@ -132,6 +141,8 @@ void Input::parse() {
 
 void Input::Parse() {
     istringstream iss(strLine);
+
+
     // iss >> ws;
     string token;
     string cmd;
@@ -151,12 +162,8 @@ void Input::Parse() {
 
         else {
             // check for semicolon
-            //
-            // cout << token << ' ' << token.size() << endl;
-            //if (token.size() == 0) {
-            //    cout << "this is lame." << endl;
-            //}
-
+            // remove the extra spaces
+            cout << "token: " << token << token.size() << endl;
             if (token.size() != 0 && token.at(token.size() - 1) == ';') {
                 token.erase(token.size()-1);
                 if (cmd.empty()) {
