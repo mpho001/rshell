@@ -5,9 +5,6 @@
 using namespace std;
 
 int main() {
-
-    cout << "hello world" << endl;
-
     Input in;
 
     in.getInput();
