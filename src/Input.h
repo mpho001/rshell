@@ -18,10 +18,12 @@ class Input {
         char* cmds[50];
         vector<string> wholeLine;
         queue<char** > work;
+        queue<string> tasks;
     public:
         Input() {};
         void getInput();
         void parse();
+        void Parse();
 };
 
 void Input::getInput() {
@@ -34,37 +36,36 @@ void Input::parse() {
 
     char delimit[] = {' '};
 
-    cout << strLine << endl;
     char str[strLine.size()+1];
     strcpy(str, strLine.c_str());
     char* p = strtok(str, delimit);
     
     // keeps track of location in arrays
     int i = 0;
+    // is it last part of line
     bool single = true;
     while (p != 0) {
         string temp = p;
         if (temp == "&&" || temp == "||" || temp == ";") {
             // null terminated
-            cmds[i] = (char*)"\0";
-            work.push(cmds);
-            i = 0;
-            // *cmds = new char[50];
-            memset(cmds, 0, sizeof(cmds));
-            cmds[i] = p;
-            ++i;
-            cmds[i] = (char*)"\0";
-            work.push(cmds);
-            i = 0;
-            memset(cmds, 0, sizeof(cmds));
+            //cmds[i] = (char*)"\0";
+            //work.push(cmds);
+            //i = 0;
+            //memset(cmds, 0, sizeof(cmds));
+            //cmds[i] = p;
+            //++i;
+            //cmds[i] = (char*)"\0";
+            //work.push(cmds);
+            //i = 0;
+            //memset(cmds, 0, sizeof(cmds));
             single = false;
         }
 
         else {
             // do semicolon check
-            // FIX the string
+            // FIX when semicolon at the end
+            // it gives segfault
             if (temp.at(temp.size()-1) == ';') {
-                //cmds[i] = (char*)";";
                 //if (i != 0) {
                 //    work.push(cmds);
                 //    memset(cmds, 0, sizeof(cmds));
@@ -77,7 +78,6 @@ void Input::parse() {
                 //i = 0;
 
                 temp.erase(temp.size()-1);
-                cout << "temp: " << temp << endl;
     
                 char arr[1024];
                 strncpy(arr, temp.c_str(), sizeof(arr));
@@ -97,8 +97,11 @@ void Input::parse() {
                 i = 0;
                 single = false;
             }
+            // no semicolon at the end
             else {
                 cmds[i] = p;
+                cout << "just word: ";
+                cout << cmds[i] << endl;
                 ++i;
                 single = true;
             }
@@ -122,9 +125,61 @@ void Input::parse() {
              cout << a[k] << ' ';
              ++k;
          }
-        // cout << *a << ' ';
         work.pop();
     }
+}
+
+void Input::Parse() {
+    istringstream iss(strLine);
+    string token;
+    string cmd;
+    bool end = true;
+    while (getline(iss, token, ' ')) {
+        if (token == "&&" || token == "||" || token == ";") {
+            tasks.push(cmd);
+            cmd.clear();
+            tasks.push(token);
+            end = false;
+        }
+
+        else {
+            // check for semicolon
+            if (token.at(token.size() - 1) == ';') {
+                token.erase(token.size()-1);
+                if (cmd.empty()) {
+                    tasks.push(token);
+                }
+                else {
+                    tasks.push(cmd + " " + token);
+                    cmd.clear();
+                }
+                tasks.push(";");
+                end = false;
+            }
+
+            else {
+                if (cmd.empty()) {
+                    cmd = token;
+                }
+                else {
+                    cmd = cmd + " " + token;
+                }
+                end = true;
+            }
+        }
+
+    }
+
+    if (end) {
+        tasks.push(cmd);
+    }
+
+    cout << "tasks size: " << tasks.size() << endl;
+    while (tasks.size() != 0) {
+        cout << tasks.front() << endl;
+        tasks.pop();
+    }
+
 }
 
 #endif
