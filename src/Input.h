@@ -7,6 +7,7 @@
 #include <sstream>
 #include <cstring>
 #include <queue>
+#include <stdlib.h>
 #include "Shell.h"
 
 using namespace std;
@@ -131,10 +132,16 @@ void Input::parse() {
 
 void Input::Parse() {
     istringstream iss(strLine);
+    // iss >> ws;
     string token;
     string cmd;
     bool end = true;
     while (getline(iss, token, ' ')) {
+        if (token == " ") {
+            cout << "here yo" << endl;
+            exit(0);
+        }
+
         if (token == "&&" || token == "||" || token == ";") {
             tasks.push(cmd);
             cmd.clear();
@@ -144,7 +151,13 @@ void Input::Parse() {
 
         else {
             // check for semicolon
-            if (token.at(token.size() - 1) == ';') {
+            //
+            // cout << token << ' ' << token.size() << endl;
+            //if (token.size() == 0) {
+            //    cout << "this is lame." << endl;
+            //}
+
+            if (token.size() != 0 && token.at(token.size() - 1) == ';') {
                 token.erase(token.size()-1);
                 if (cmd.empty()) {
                     tasks.push(token);
