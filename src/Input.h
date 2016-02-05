@@ -28,11 +28,17 @@ class Input {
 
 // if # spotted, cuts off # and everything after it
 void Input::getInput() {
+    cout << "$ ";
     getline (cin, strLine);
     if (strLine == "exit") {
         cout << "user chose to exit" << endl;
         exit(0);
     }
+
+    if (strLine == "\n") {
+        cout << "here" << endl;
+    }
+
     size_t found = strLine.find('#');
     if (found != string::npos) {
         strLine.erase(strLine.begin() + found, strLine.end());
