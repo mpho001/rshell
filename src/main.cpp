@@ -13,7 +13,7 @@ using namespace std;
 int main() {
     Input in;
     
-    while(1) {
+//    while(1) {
 
     in.getInput();
     queue<string> tasks = in.Parse();
@@ -29,6 +29,7 @@ int main() {
         // cout << "child: " << pid << endl;
         if (execvp(c[0], c) == -1) {
             perror("exec");
+            exit(0);
         }
     }
 
@@ -47,9 +48,10 @@ int main() {
 
     // in.getInput();
 
+    cout << flush;
     delete c;
 
-    }
+ //   }
 
     return 0;
 
