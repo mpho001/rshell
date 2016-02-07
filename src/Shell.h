@@ -10,12 +10,13 @@ using namespace std;
 class Shell {
     public:
         // Constructor and destructor
-        Shell();
-        ~Shell();
+        Shell() {} ;
+        ~Shell() {} ;
 };
 
 class Execute: public Shell {
 	public:
+        Execute(): Shell() {};
 		// this function would be used to execute our rshell
 	        void execute(char** a);
 };
