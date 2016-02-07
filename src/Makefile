@@ -3,7 +3,7 @@ CC_FLAGS = -Wall -Werror -ansi -pedantic
 EXEC = a.out
 AUTOMAKE_OPTIONS = subdir-objects
 SOURCES = $(wildcard *.cpp)
-OBJECTS = Input.o
+OBJECTS = Input.o Execute.o
 
 $(EXEC): $(OBJECTS) -o $(EXEC)
 	$(CC) $(OBJECTS) -o $(EXEC)
