@@ -13,10 +13,10 @@ using namespace std;
 void Input::getInput() {
     cout << "$ ";
     getline (cin, strLine);
-     //if (strLine == "exit") {
-     //    cout << "user chose to exit" << endl << flush;
-     //    exit(0);
-     //}
+      if (strLine == "exit") {
+          cout << "user chose to exit" << endl << flush;
+          exit(0);
+     }
 
     // if (strLine == "\n") {
     //    cout << "here" << endl;
@@ -79,7 +79,7 @@ queue<string> Input::Parse() {
         tasks.push(cmd);
     }
 
-    cout << "tasks size: " << tasks.size() << endl;
+    // cout << "tasks size: " << tasks.size() << endl;
     // while (tasks.size() != 0) {
     //     cout << tasks.front() << endl;
     //     tasks.pop();
