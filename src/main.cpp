@@ -18,16 +18,16 @@ int main() {
     in.getInput();
     queue<string> tasks = in.Parse();
 
-    char** c;
+    char** c = NULL;
     Execute ex;
     while (tasks.size() != 0) {
+        if (tasks.front() == "exit") {
+            exit(0);
+        }
         c = in.toChar(tasks.front());
         ex.execute(c);
         tasks.pop();
     }
-
-    // Execute ex;
-    // ex.execute(c);
 
 //    int i = 0;
 //    while (c[i] != '\0') {
@@ -38,7 +38,9 @@ int main() {
     // in.getInput();
 
     cout << flush;
-    delete c;
+    if (c != NULL) {
+        delete c;
+    }
 
 //    }
 

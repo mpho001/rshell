@@ -9,43 +9,61 @@
 
 using namespace std;
 
-// if # spotted, cuts off # and everything after it
 void Input::getInput() {
     cout << "$ ";
     getline (cin, strLine);
-      if (strLine == "exit") {
-          cout << "user chose to exit" << endl << flush;
-          exit(0);
-     }
+    
+    // if the user ONLY entered exit  
+    if (strLine == "exit") {
+        cout << "user chose to exit" << endl << flush;
+        exit(0);
+    }
 
-    // if (strLine == "\n") {
-    //    cout << "here" << endl;
-    // }
-
+    // if # spotted, cuts off # and everything after it
     size_t found = strLine.find('#');
     if (found != string::npos) {
+        cout << "found it!" << endl;
         strLine.erase(strLine.begin() + found, strLine.end());
+        if (strLine.size() == 0) {
+            cout << "nothing left" << endl;
+        }
     }
 }
 
 // returns a queue of parsed string
 queue<string> Input::Parse() {
+    // checks if there's anything
+    if (strLine.size() == 0) {
+        return tasks;
+    }
+    
+    // checks if string has only spaces
+    if (strLine.find_first_not_of(' ') == string::npos) {
+        return tasks;
+    }
+
     istringstream iss(strLine);
 
     // iss >> ws;
     string token;
     string cmd;
+    // end used to determine if its end of user input
     bool end = true;
+    // ignores ' '
     while (getline(iss, token, ' ')) {
         if (token == "&&" || token == "||" || token == ";") {
+            // pushes whatever cmd was
             tasks.push(cmd);
+            // makes string empty
             cmd.clear();
+            // pushes &&, ||, or ;
             tasks.push(token);
             end = false;
         }
-
+        
+        // else if not a connector
         else {
-            // check for semicolon
+            // check if end of token has semicolon
             // remove the extra spaces
             // cout << "token: " << token << token.size() << endl;
             if (token.size() != 0 && token.at(token.size() - 1) == ';') {
@@ -60,7 +78,8 @@ queue<string> Input::Parse() {
                 tasks.push(";");
                 end = false;
             }
-
+            
+            // no semicolon detected at end of word
             else {
                 if (cmd.empty()) {
                     cmd = token;
@@ -79,7 +98,7 @@ queue<string> Input::Parse() {
         tasks.push(cmd);
     }
 
-    // cout << "tasks size: " << tasks.size() << endl;
+    cout << "tasks size: " << tasks.size() << endl;
     // while (tasks.size() != 0) {
     //     cout << tasks.front() << endl;
     //     tasks.pop();
