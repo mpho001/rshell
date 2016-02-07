@@ -17,7 +17,7 @@ class Shell {
 class Execute: public Shell {
 	public:
 		// this function would be used to execute our rshell
-	        void execute();
+	        void execute(char** a);
 };
 
 class Quit: public Shell {
