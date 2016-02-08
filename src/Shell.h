@@ -35,12 +35,12 @@ class Run: public Shell {
 
 class Connectors: public Shell {
 	protected:
-		Shell* conn_type
+		Shell* conn_type;
 
 	public: 
 		// lets us identify the connector to execute the function accord                //  ing to the connector 
 		virtual bool behave() = 0;
-		virtual void set_behave(Connector* conn_type);
+		virtual void set_behave(Connectors* conn_type);
 };
 #endif
 
