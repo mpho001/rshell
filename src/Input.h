@@ -14,13 +14,15 @@ using namespace std;
 
 class Input {
     private:
-        string strLine;
-        // char* str;
+        char* user;
+        char* host;
         char* cmds[50];
-        vector<string> wholeLine;
+        string strLine;
         queue<string> tasks;
     public:
         Input() {};
+        void setUser();
+        void setHost();
         void getInput();
         queue<string> Parse();
         char** toChar(string a);

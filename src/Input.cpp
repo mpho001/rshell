@@ -6,10 +6,16 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
+#include <pwd.h>
 
 using namespace std;
 
+void Input::setUser() {
+}
+
 void Input::getInput() {
+    //setUser();
+    // cout << "user: " << user << endl;
     cout << "$ ";
     getline (cin, strLine);
     
