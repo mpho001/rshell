@@ -117,7 +117,7 @@ char** Input::toChar(string a) {
     stringstream stream(a);
     string oneWord;
     int i = 0;
-    char** c = new char*[50];
+    char** c = new char*[1024];
     // one word at a time
     while (stream >> oneWord) {
         char* ptr = new char[oneWord.size() + 1];
