@@ -87,26 +87,27 @@ int main() {
 
     //-----------------------------------------------------------------------------------------------	
 
-           // else if (tasks.front() == ";") {
-            //    // do something else, son
-           // }
+            else if (tasks.front() == ";") {
+                // do something else, son
+                tasks.pop();
+                // just remove the semicolon and keep going
+            }
             
             // if not a connector or exit, then execute it 
             else 
         {
                 c = in.toChar(tasks.front());
-                cout << "task: " << tasks.front() << endl;
                 ex.execute(c, comp_status);
                 int i = 0;
-                cout << "array: ";
-                while (c[i] != '\0') {
-                    cout << c[i] << ' ';
-                    ++i;
-                }
-                cout << endl;
+                // cout << "array: ";
+                // while (c[i] != '\0') {
+                //    cout << c[i] << ' ';
+                //    ++i;
+                //}
+                //cout << endl;
 
                 c = 0;
-            // cout << "here " << comp_status << endl;
+            //cout << "here " << comp_status << endl;
             tasks.pop();
             }
         }
