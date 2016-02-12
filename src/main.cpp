@@ -20,7 +20,7 @@ int main() {
         tasks = in.Parse();
 
         bool comp_status = true;
-        char** c = NULL;
+        char** c;
         Execute ex;
         //bool worked = true;
         while (tasks.size() != 0) 
@@ -95,6 +95,7 @@ int main() {
             else 
         {
                 c = in.toChar(tasks.front());
+                cout << "task: " << tasks.front() << endl;
                 ex.execute(c, comp_status);
                 int i = 0;
                 cout << "array: ";
@@ -104,7 +105,7 @@ int main() {
                 }
                 cout << endl;
 
-                // delete [] c;
+                c = 0;
             // cout << "here " << comp_status << endl;
             tasks.pop();
             }
