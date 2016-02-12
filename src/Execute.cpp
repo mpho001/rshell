@@ -9,15 +9,15 @@
 
 using namespace std;
 
-void Execute::execute(char** a) {
+bool Execute::execute(char** a) {
     pid_t pid = fork();
     if (pid == 0) {
         // then its the child
         if (execvp(a[0], a) == -1) {
             // then it failed
             perror("didn't work");
-            // so exit
-            exit(0);
+            // will return a false to let possible connector know that the task 	    //was not fullfilled
+            return false;
         }
     }
 
@@ -28,4 +28,6 @@ void Execute::execute(char** a) {
             perror("wait");
         }
     }
+
+    return true;
 }

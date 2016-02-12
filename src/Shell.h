@@ -18,7 +18,7 @@ class Execute: public Shell {
 	public:
         Execute(): Shell() {};
 		// this function would be used to execute our rshell
-	        void execute(char** a);
+	        bool execute(char** a);
 };
 
 class Quit: public Shell {
