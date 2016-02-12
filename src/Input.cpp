@@ -10,12 +10,11 @@
 
 using namespace std;
 
-void Input::setUser() {
-}
+// void Input::setUser() {
+// }
 
 void Input::getInput() {
-    //setUser();
-    // cout << "user: " << user << endl;
+    strLine.clear();
     cout << "$ ";
     getline (cin, strLine);
     
@@ -39,6 +38,12 @@ void Input::getInput() {
 // returns a queue of parsed string
 queue<string> Input::Parse() {
     // checks if there's anything
+    // cout << "test: " << strLine << endl;
+    
+    // clears tasks queue
+    queue<string> empty;
+    swap(tasks, empty);
+
     if (strLine.size() == 0) {
         return tasks;
     }
@@ -104,11 +109,6 @@ queue<string> Input::Parse() {
         tasks.push(cmd);
     }
 
-    cout << "tasks size: " << tasks.size() << endl;
-    // while (tasks.size() != 0) {
-    //     cout << tasks.front() << endl;
-    //     tasks.pop();
-    //}
     return tasks;
 }
 
@@ -117,7 +117,7 @@ char** Input::toChar(string a) {
     stringstream stream(a);
     string oneWord;
     int i = 0;
-    char** c = new char*[50];
+    char** c = new char*[1024];
     // one word at a time
     while (stream >> oneWord) {
         char* ptr = new char[oneWord.size() + 1];

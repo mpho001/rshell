@@ -1,3 +1,5 @@
+#!/bin/sh
+
 # hello there
 cd ..
 cd src
