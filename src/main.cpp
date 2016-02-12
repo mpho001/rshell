@@ -49,9 +49,6 @@ int main() {
     }
 
     cout << flush;
-    if (c != NULL) {
-        delete c;
-    }
 
     }
 
