@@ -5,14 +5,21 @@
 
 using namespace std;
 
+// our main abstract base class, used main for pointers
+
 class Shell {
     public:
         // Constructor and destructor
-        Shell();
-        ~Shell();
-        virtual void run() = 0;
+        Shell() {} ;
+        ~Shell() {} ;
 };
 
+class Execute: public Shell {
+	public:
+        Execute(): Shell() {};
+		// this function would be used to execute our rshell
+	        void execute(char** a, bool &comp_status);
+};
 
 #endif
 
