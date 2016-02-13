@@ -46,4 +46,4 @@ rshell: $(SOURCEDIR)/main.cpp $(OBJECTS)
 	$(CC) $(CC_FLAGS) -o $(BUILDDIR)/$(EXECU) $(OBJECTS)
 
 clean:
-	rm -f $(OBJECTS) $(BUILDDIR)/$(EXEC)
+	rm -f $(OBJECTS) $(BUILDDIR)/$(EXECU)
