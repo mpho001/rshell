@@ -9,34 +9,40 @@
 
 using namespace std;
 
-void Execute::execute(char** a, bool &comp_status) 
-{
-    comp_status = true;	
-    cout << "first " << comp_status << endl;
-    pid_t pid = fork();
+void Execute::execute(char** a, bool &comp_status) {
+	// create a fork for a child and parent 
+	pid_t pid = fork();
+
+	// the child 
+	if (pid < 0){
+		perror("fork failure");
+	}
+
     if (pid == 0) 
     {
         // then its the child
         if (execvp(a[0], a) == -1) 
 	{
-	    comp_status = false;
-	    //comp_status = false;
-            cout << comp_status << endl;
-	    // then it failed
             perror("test");
-            // will return a false to let possible connector know that the task 	    //was not fullfilled
-	    exit(EXIT_FAILURE);
+            exit(69);
         }
+	else
+	{
+		exit(0);
+	}
     }
-
-    else {
-        // this is the parent
-	// we want to wait for the child to finish
-	if (wait(0) == 1) {
-            perror("wait");
-        }
-	cout << "in parent" << endl;
+    int num = 0;
+    wait(&num);
+    
+    int num_2 = WEXITSTATUS(num);
+    
+    if(num_2 == 69)
+    {
+	    comp_status = false;
     }
-    cout << "after everything " << comp_status << endl;
-
+    if(num_2 == 0)
+    {
+	    comp_status = true;
+    }
+   
 }

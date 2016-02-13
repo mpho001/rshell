@@ -37,20 +37,19 @@ int main() {
        	{
 	    tasks.pop(); //gets rid of the &&
             // if the command before this one does returns false then we dont do            //the next command
-	    if(comp_status == false)
-	    {
-		    cout << "went into false " << endl;
-		  // so the && connector should have already been deleted, this is a while loop to delete the next commands so that they wont run if the command before fails  
-		  while(tasks.front() != "&&" || tasks.front() != "||" || tasks.front() != ";")
-		  {
-			 tasks.pop();
-		  }
+	    if(comp_status == false) {
+		    // so the && connector should have already been deleted, this is a while loop to delete the next commands so that they wont run if the command before fails  
+		    if(tasks.size() != 0)
+		    {
+			    if(tasks.front() != "&&" || tasks.front() != "||" || tasks.front() != ";") 
+			    {
+				    tasks.pop();
+			    }
+		    }
 	    }
 	
 	    // here we just run the next command like normal
-	    if(comp_status == true)
-	    {
-		    cout << "went into true" << endl;
+	    if(comp_status == true) {
 		    c = in.toChar(tasks.front());
 		    ex.execute(c, comp_status);
 		    tasks.pop();
@@ -75,8 +74,7 @@ int main() {
 		// if its false then for || it should run
 		
 		if(comp_status == false)
-		{
-	    	    cout << "in false" << endl;		
+		{		
 		    c = in.toChar(tasks.front());
 		    ex.execute(c, comp_status);
 		    tasks.pop();
@@ -85,24 +83,21 @@ int main() {
 
 //----------------------------------------------------------------------------------------------------------------------	
 
-       // else if (tasks.front() == ";") {
-        //    // do something else, son
-       // }
+        //else if (tasks.front() == ";") {
+            // do something else, son
+
+	  // }
         
         // if not a connector or exit, then execute it 
         else 
 	{
             c = in.toChar(tasks.front());
             ex.execute(c, comp_status);
-	    cout << "here " << comp_status << endl;
 	    tasks.pop();
         }
     }
 
     cout << flush;
-    
     }
-
     return 0;
-
 }
