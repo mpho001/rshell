@@ -16,23 +16,22 @@ int main() {
     
     while(1) {
 
-    in.getInput();
-    tasks = in.Parse();
+        in.getInput();
+        tasks = in.Parse();
 
-    bool comp_status;
-    char** c = NULL;
-    Execute ex;
-    //bool worked = true;
-    while (tasks.size() != 0) 
-    {
-	
-	// if at any point the user has exit
-        if (tasks.front() == "exit") {
-            exit(0);
-        }
+        bool comp_status = true;
+        char** c;
+        Execute ex;
+        //bool worked = true;
+        while (tasks.size() != 0) 
+        {
+        
+        // if at any point the user has exit
+            if (tasks.front() == "exit") {
+                exit(0);
+            }
 
-//------------------------------------------------------------------------------------------------------------
-
+    //-----------------------------------------------------------------------------------------
         else if (tasks.front() == "&&")
        	{
 	    tasks.pop(); //gets rid of the &&
@@ -55,8 +54,8 @@ int main() {
 		    tasks.pop();
 	    }
         }
+    //---------------------------------------------------------------------------------------------
 
-//------------------------------------------------------------------------------------------------------------------
 
         else if (tasks.front() == "||") 
 	{
@@ -80,23 +79,23 @@ int main() {
 		    tasks.pop();
 		}
 	}
+	else if (tasks.front() == ";")
+       	{
+                tasks.pop();
+	}
 
-//----------------------------------------------------------------------------------------------------------------------	
 
-        //else if (tasks.front() == ";") {
-            // do something else, son
+    //-----------------------------------------------------------------------------------------------	
 
-	  // }
         
-        // if not a connector or exit, then execute it 
         else 
 	{
             c = in.toChar(tasks.front());
             ex.execute(c, comp_status);
 	    tasks.pop();
+	}
+            
         }
-    }
-
     cout << flush;
     }
     return 0;
