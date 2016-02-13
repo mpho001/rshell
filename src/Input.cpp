@@ -20,6 +20,7 @@ void Input::getInput() {
     
     // if the user ONLY entered exit  
     if (strLine == "exit") {
+        cout << "You have exited shell." << endl;
         exit(0);
     }
 
@@ -127,13 +128,15 @@ char** Input::toChar(string a) {
     char** c = new char*[1024];
     // one word at a time
     while (stream >> oneWord) {
+        // allocating memory
         char* ptr = new char[oneWord.size() + 1];
         // copies string (converted to c-string) to ptr)
         memcpy(ptr, oneWord.c_str(), oneWord.size() + 1);
         c[i] = ptr;
         ++i;
     }
-
+    
+    // null terminates the char**
     c[i] = '\0';
 
     return c;
