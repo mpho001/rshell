@@ -21,3 +21,8 @@
  - If the input ends in && or ||, our bash does not ask for additional user input
  - If the && or || connectors are not separated by spaces, the program will not recognize it
  - The bash script will not run properly if the while(1) loop in main isn't commented out.
+
+### Github link
+ Here is the link to our [repo][1]
+
+[1]: https://github.com/mpho001/rshell.git 
