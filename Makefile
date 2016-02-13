@@ -17,9 +17,13 @@
 CC = g++
 CC_FLAGS = -Wall -Werror -ansi -pedantic
 EXEC = a.out
+EXECU = rshell
+
+ODIR = bin
+dummy_build_folder := $(shell mkdir -p $(ODIR))
 
 SOURCEDIR = src
-BUILDDIR = src
+BUILDDIR = bin
 
 #AUTOMAKE_OPTIONS = subdir-objects
 SOURCES = $(wildcard $(SOURCEDIR)/*.cpp)
@@ -37,6 +41,9 @@ $(OBJECTS): $(BUILDDIR)/%.o: $(SOURCEDIR)/%.cpp
 # removed main.cpp after exec
 all: $(SOURCEDIR)/main.cpp $(OBJECTS)
 	$(CC) $(CC_FLAGS) -o $(SOURCEDIR)/$(EXEC) $(OBJECTS) 
+
+rshell: $(SOURCEDIR)/main.cpp $(OBJECTS)
+	$(CC) $(CC_FLAGS) -o $(BUILDDIR)/$(EXECU) $(OBJECTS)
 
 clean:
 	rm -f $(OBJECTS) $(BUILDDIR)/$(EXEC)
