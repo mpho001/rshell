@@ -23,80 +23,65 @@ int main() {
         char** c;
         Execute ex;
         //bool worked = true;
-        while (tasks.size() != 0) 
-        {
+        while (tasks.size() != 0) {
         
-        // if at any point the user has exit
+            // if at any point the user has exit
             if (tasks.front() == "exit") {
                 exit(0);
             }
 
-    //-----------------------------------------------------------------------------------------
-        else if (tasks.front() == "&&")
-       	{
-	    tasks.pop(); //gets rid of the &&
-            // if the command before this one does returns false then we dont do            //the next command
-	    if(comp_status == false) {
-		    // so the && connector should have already been deleted, this is a while loop to delete the next commands so that they wont run if the command before fails  
-		    if(tasks.size() != 0)
-		    {
-			    if(tasks.front() != "&&" || tasks.front() != "||" || tasks.front() != ";") 
-			    {
-				    tasks.pop();
-			    }
-		    }
-	    }
-	
-	    // here we just run the next command like normal
-	    if(comp_status == true) {
-		    c = in.toChar(tasks.front());
-		    ex.execute(c, comp_status);
-		    tasks.pop();
-	    }
-        }
-    //---------------------------------------------------------------------------------------------
+            //------------------------------------------------------------------
+
+            else if (tasks.front() == "&&") {
+	            tasks.pop(); //gets rid of the &&
+                // if the command before this one does returns F,then dont do
+                // //the next command
+	            if(comp_status == false) {
+		        // so the && connector should have already been deleted,
+                // this is a while loop to
+                // delete the next commands so that they wont run if
+                // the command before fails  
+		            if(tasks.size() != 0) {
+			            if(tasks.front() != "&&" || tasks.front() != "||" ||
+                                tasks.front() != ";") {
+				            tasks.pop();
+			            }
+		            }
+	            }
+            }
+            //------------------------------------------------------------------
 
 
-        else if (tasks.front() == "||") 
-	{
-		tasks.pop();  // gets rid of the || 
-		if(comp_status == true)
-		{
-			if(tasks.size() != 0)
-		  	{
-			  	if (tasks.front() != "&&" || tasks.front() != "||" || tasks.front() != ";")
-			  	{
-				 	tasks.pop();
-			  	}
-		  	}
-		}
-		// if its false then for || it should run
-		
-		if(comp_status == false)
-		{		
-		    c = in.toChar(tasks.front());
-		    ex.execute(c, comp_status);
-		    tasks.pop();
-		}
-	}
-	else if (tasks.front() == ";")
-       	{
+            else if (tasks.front() == "||") {
+		        tasks.pop();  // gets rid of the || 
+		        if(comp_status == true) {
+			        if(tasks.size() != 0) {
+			  	        if (tasks.front() != "&&" || tasks.front() != "||" ||
+                                tasks.front() != ";") {
+				 	        tasks.pop();
+			  	        }
+		  	        }   
+		        }
+	        }
+
+	        else if (tasks.front() == ";") {
                 tasks.pop();
-	}
+	        }
 
 
-    //-----------------------------------------------------------------------------------------------	
+    //--------------------------------------------------------------------------
 
         
-        else 
-	{
-            c = in.toChar(tasks.front());
-            ex.execute(c, comp_status);
-	    tasks.pop();
-	}
+            else { 
+                c = in.toChar(tasks.front());
+                ex.execute(c, comp_status);
+	            tasks.pop();
+	        }
             
         }
     cout << flush;
+
     }
+
     return 0;
 }
