@@ -14,19 +14,21 @@ int main() {
     Input in;
     queue<string> tasks;
     
+    // to exit while loop, user must type exit 
     while(1) {
 
         in.getInput();
         tasks = in.Parse();
-
+        
+        // bool determines whether command was successful
         bool comp_status = true;
         char** c;
         Execute ex;
-        //bool worked = true;
         while (tasks.size() != 0) {
         
             // if at any point the user has exit
             if (tasks.front() == "exit") {
+                cout << "You have exited shell." << endl;
                 exit(0);
             }
 
@@ -63,15 +65,16 @@ int main() {
 		  	        }   
 		        }
 	        }
-
+            
+            // simply pop the semicolon and continue looping
 	        else if (tasks.front() == ";") {
                 tasks.pop();
 	        }
 
 
-    //--------------------------------------------------------------------------
+            //-----------------------------------------------------------------
 
-        
+            // task was not a connector, and therefore a command 
             else { 
                 c = in.toChar(tasks.front());
                 ex.execute(c, comp_status);
