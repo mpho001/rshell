@@ -109,6 +109,13 @@ queue<string> Input::Parse() {
         tasks.push(cmd);
     }
 
+    // check if last thing in task is a && or ||
+    if (token == "&&" || token == "||") {
+        // get user input again
+        getInput();
+        Parse();
+    }
+
     return tasks;
 }
 
