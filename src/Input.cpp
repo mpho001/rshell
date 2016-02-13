@@ -20,17 +20,15 @@ void Input::getInput() {
     
     // if the user ONLY entered exit  
     if (strLine == "exit") {
-        cout << "user chose to exit" << endl << flush;
         exit(0);
     }
 
     // if # spotted, cuts off # and everything after it
     size_t found = strLine.find('#');
     if (found != string::npos) {
-        cout << "found it!" << endl;
         strLine.erase(strLine.begin() + found, strLine.end());
         if (strLine.size() == 0) {
-            cout << "nothing left" << endl;
+            // cout << "nothing left" << endl;
         }
     }
 }
@@ -90,6 +88,8 @@ queue<string> Input::Parse() {
                 end = false;
             }
             
+            // check if connectors are hidden in words
+            
             // no semicolon detected at end of word
             else {
                 if (cmd.empty()) {
@@ -110,11 +110,11 @@ queue<string> Input::Parse() {
     }
 
     // check if last thing in task is a && or ||
-    if (token == "&&" || token == "||") {
+    // if (token == "&&" || token == "||") {
         // get user input again
-        getInput();
-        Parse();
-    }
+    //     getInput();
+    //     Parse();
+    // }
 
     return tasks;
 }
