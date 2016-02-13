@@ -126,6 +126,9 @@ char** Input::toChar(string a) {
         c[i] = ptr;
         ++i;
     }
+
+    c[i] = '\0';
+
     return c;
 }
 
