@@ -33,7 +33,7 @@ OBJECTS = $(patsubst $(SOURCEDIR)/%.cpp,$(BUILDDIR)/%.o,$(SOURCES))
 
 $(BUILDDIR)/$(EXEC): $(OBJECTS)
    #	-o $(EXEC)
-	$(CC) $(OBJECTS) -o $(SOURCEDIR)/$(EXEC)
+	$(CC) $(OBJECTS) -o $(BUILDDIR)/$(EXECU)
 
 $(OBJECTS): $(BUILDDIR)/%.o: $(SOURCEDIR)/%.cpp
 	$(CC) -c $(CC_FLAGS) $< -o $@
