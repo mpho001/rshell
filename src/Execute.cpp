@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
+#include <errno.h>
 #include "Shell.h"
 
 using namespace std;
@@ -23,12 +24,16 @@ void Execute::execute(char** a, bool &comp_status) {
 		// then its the child
 		if (execvp(a[0], a) == -1) {
 			// if the command fails then we output error
+            
+            // new
+
 			perror("command not accomplished");
 			// we have exit 69 which would store the number
 			// 69 for later usage in determining comp_status
 			// also any number entered other than 0 to exit
 			// makes it return an unsuccessful completition 
-			exit(69);
+			// exit(69);
+            exit(errno);
 		}
 		else{
 			// returns a successful completition
@@ -48,9 +53,14 @@ void Execute::execute(char** a, bool &comp_status) {
 	// if num_2 is 69 then that means it was an 
 	// unsuccessful completition and so comp_status 
 	// is false
-	if(num_2 == 69){
-	    comp_status = false;
-	}
+	//if(num_2 == 69){
+	//    comp_status = false;
+	//}
+    
+    // if errno > 0, then it didnt work
+    if (num_2 > 0) {
+        comp_status = false;
+    }
 	
 	// if num_2 is 0 then that means it was a 
 	// successfuk completition adn so comp_status
@@ -58,4 +68,6 @@ void Execute::execute(char** a, bool &comp_status) {
 	if(num_2 == 0){
 		comp_status = true;
 	}
+
+
 }
