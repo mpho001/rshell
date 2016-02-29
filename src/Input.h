@@ -25,6 +25,7 @@ class Input {
         void setHost();
         void getInput();
         queue<string> Parse();
+        queue<string> testParse();
         char** toChar(string a);
 };
 

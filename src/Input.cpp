@@ -72,6 +72,12 @@ queue<string> Input::Parse() {
         }
         
         // else if not a connector
+       
+        // else if (strLine.find("&&") != std::string::npos) {
+        //     cout << "found &&" << endl;
+            // find position and split up string accordingly
+        // }
+
         else {
             // check if end of token has semicolon
             // remove the extra spaces
