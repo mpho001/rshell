@@ -18,6 +18,9 @@ int main() {
     while(1) {
 
         in.getInput();
+        bool test = in.isTest();
+        cout << "test: " << test << endl;
+        exit(0);
         tasks = in.Parse();
         
         // bool determines whether command was successful

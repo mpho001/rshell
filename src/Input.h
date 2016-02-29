@@ -21,6 +21,8 @@ class Input {
         queue<string> tasks;
     public:
         Input() {};
+        bool isTest();
+        bool chainTest();
         void setUser();
         void setHost();
         void getInput();

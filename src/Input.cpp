@@ -34,6 +34,14 @@ void Input::getInput() {
     }
 }
 
+bool Input::isTest() {
+    if (strLine.at(0) == '[') {
+        return true;
+    }
+    return false;
+}
+
+
 // returns a queue of parsed string
 queue<string> Input::Parse() {
     // checks if there's anything
