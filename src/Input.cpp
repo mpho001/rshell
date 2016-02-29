@@ -7,6 +7,7 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <pwd.h>
+#include <algorithm>
 
 using namespace std;
 
@@ -35,7 +36,27 @@ void Input::getInput() {
 }
 
 bool Input::isTest() {
-    if (strLine.at(0) == '[') {
+    size_t found = strLine.find('[');
+    if (found != string::npos) {
+        if ( validTest() ) {
+            return true;
+        }
+        return false;
+    }
+
+    if (strLine.find("test") != string::npos) {
+        return true;
+    }
+
+    return false;
+}
+
+// handle error when user puts something like "] [" wtf
+bool Input::validTest() {
+    size_t cntrOpen  = std::count(strLine.begin(), strLine.end(), '[');
+    size_t cntrClose = std::count(strLine.begin(), strLine.end(), ']');
+
+    if (cntrOpen == cntrClose) {
         return true;
     }
     return false;

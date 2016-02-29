@@ -22,6 +22,7 @@ class Input {
     public:
         Input() {};
         bool isTest();
+        bool validTest();
         bool chainTest();
         void setUser();
         void setHost();
