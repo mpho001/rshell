@@ -43,8 +43,9 @@ bool Input::isTest() {
         }
         return false;
     }
-
-    if (strLine.find("test") != string::npos) {
+    
+    // check if test is first word in string or after connector
+    if (strLine.find("test ") != string::npos) {
         return true;
     }
 
@@ -88,16 +89,45 @@ queue<string> Input::Parse() {
     string cmd;
     // end used to determine if its end of user input
     bool end = true;
+    bool start = true;
+    // if a connector was just detected
+    bool con = false;
+    bool tested = false;
+
     // ignores ' '
     while (getline(iss, token, ' ')) {
-        if (token == "&&" || token == "||" || token == ";") {
+
+         if ( (start && token == "test") || (con && token == "test" )) {
+            tasks.push(token);
+            if (getline(iss, token, ' ')) {
+                if (token == "-e" || token == "-f" || token == "-d") {
+                    tasks.push(token);
+                    if (getline(iss, token, ' ')) {
+                        tasks.push(token);
+                    }
+                }
+                else {
+                    tasks.push("-e");
+                    tasks.push(token);
+                }
+            }
+            end = false;
+            tested = true;
+        }        
+
+
+        else if (token == "&&" || token == "||" || token == ";") {
             // pushes whatever cmd was
-            tasks.push(cmd);
+            if (!tested) {
+                tasks.push(cmd);
+            }
             // makes string empty
             cmd.clear();
             // pushes &&, ||, or ;
             tasks.push(token);
             end = false;
+            con = true;
+            tested = false;
         }
         
         // else if not a connector
@@ -107,7 +137,7 @@ queue<string> Input::Parse() {
             // find position and split up string accordingly
         // }
 
-        else {
+        else if (!tested) {
             // check if end of token has semicolon
             // remove the extra spaces
             // cout << "token: " << token << token.size() << endl;
@@ -136,8 +166,11 @@ queue<string> Input::Parse() {
                 }
                 end = true;
             }
+            con = false;
+            tested = false;
         }
 
+        start = false;
     }
     
     // if no more connectors were detected

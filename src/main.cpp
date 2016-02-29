@@ -18,10 +18,19 @@ int main() {
     while(1) {
 
         in.getInput();
-        bool test = in.isTest();
-        cout << "test: " << test << endl;
-        exit(0);
+        // bool test = in.isTest();
+        // cout << "test: " << test << endl;
+        // exit(0);
         tasks = in.Parse();
+
+        cout << "size: " << tasks.size() << endl;
+
+        while (tasks.size() != 0) {
+            cout << tasks.front() << endl;
+            tasks.pop();
+        }
+
+        exit(0);
         
         // bool determines whether command was successful
         bool comp_status = true;
