@@ -2,6 +2,10 @@
 #define __SHELL_H__
 
 #include <iostream>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <unistd.h>
+#include <queue>
 
 using namespace std;
 
@@ -20,6 +24,18 @@ class Execute: public Shell {
 		// this function would be used to execute our rshell
 	        void execute(char** a, bool &comp_status);
 };
+
+class Test: public Shell {
+    private:
+        struct stat p;
+    public:
+        Test(): Shell() {};
+        bool exists(const char* s);
+        bool isReg(const char* s);
+        bool isDir(const char* s);
+        void run(queue<string>& q);
+};
+
 
 #endif
 

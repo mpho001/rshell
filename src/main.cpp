@@ -25,17 +25,22 @@ int main() {
 
         cout << "size: " << tasks.size() << endl;
 
-        while (tasks.size() != 0) {
-            cout << tasks.front() << endl;
-            tasks.pop();
-        }
+        // while (tasks.size() != 0) {
+        //     cout << tasks.front() << endl;
+        //     tasks.pop();
+        // }
 
-        exit(0);
+        // exit(0);
         
         // bool determines whether command was successful
         bool comp_status = true;
         char** c;
         Execute ex;
+
+        // TEST STUFF
+        Test test;
+
+
         while (tasks.size() != 0) {
         
             // if at any point the user has exit
@@ -70,7 +75,10 @@ int main() {
 		        tasks.pop();  // gets rid of the || 
 		        if(comp_status == true) {
 			        if(tasks.size() != 0) {
-			  	        if (tasks.front() != "&&" || tasks.front() != "||" ||
+                        if (tasks.front() == "test") {
+                            // delete all of test
+                        }
+                        else if (tasks.front() != "&&" || tasks.front() != "||" ||
                                 tasks.front() != ";") {
 				 	        tasks.pop();
 			  	        }
@@ -85,6 +93,14 @@ int main() {
 
 
             //-----------------------------------------------------------------
+            
+            
+            // the user wants to test
+            else if (tasks.front() == "test") {
+                // pops "test"
+                tasks.pop();
+                test.run(tasks);
+            }
 
             // task was not a connector, and therefore a command 
             else { 
