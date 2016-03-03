@@ -43,12 +43,18 @@ bool Test::isCon(string str) {
 
 // if user only inputs test, thats true, because
 // we add the -e, in bash thats true...?
+// so after we have detected the flag, char s will be
+// everything after that until connector or end
 void Test::run(queue<string>& q, bool& worked) {
     // if no arguments after flag, then true
     // so, check it end of queue
     // or if a connector been detected
 
-    if (q.size() == 0) { return; }
+    if (q.size() == 0) {
+        cout << "(False)" << endl;
+        worked = false;
+        return;
+    }
     if (q.front() == "-e") {  
         q.pop();
         if (q.size() == 0) { return; }
@@ -57,8 +63,18 @@ void Test::run(queue<string>& q, bool& worked) {
             worked = true;
             return;
         }
-        const char* s = q.front().c_str();
-        cout << "directory: " << q.front() << endl;
+
+        // keep checking
+        string dir;
+        while (q.size() != 0 && !(isCon(q.front()))) {
+            dir += q.front();    
+            q.pop();
+        }
+        
+
+        // const char* s = q.front().c_str();
+        const char* s = dir.c_str();
+        // cout << "directory: " << q.front() << endl;
         if (exists(s)) {
             cout << "(True)" << endl;
             worked = true; 
@@ -67,7 +83,7 @@ void Test::run(queue<string>& q, bool& worked) {
             cout << "(False)" << endl;
             worked = false;
         }
-        q.pop();
+        // q.pop();
     }
 
     else if (q.front() == "-f") {
@@ -111,7 +127,5 @@ void Test::run(queue<string>& q, bool& worked) {
         }
         q.pop();
     }
+
 }
-           
-
-

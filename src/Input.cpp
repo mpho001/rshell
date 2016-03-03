@@ -63,6 +63,10 @@ bool Input::validTest() {
     return false;
 }
 
+void Input::brackTest() {
+    // handles [ ]
+}
+
 
 // returns a queue of parsed string
 queue<string> Input::Parse() {

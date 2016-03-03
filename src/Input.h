@@ -14,8 +14,6 @@ using namespace std;
 
 class Input {
     private:
-        char* user;
-        char* host;
         char* cmds[50];
         string strLine;
         queue<string> tasks;
@@ -24,8 +22,7 @@ class Input {
         bool isTest();
         bool validTest();
         bool chainTest();
-        void setUser();
-        void setHost();
+        void brackTest();
         void getInput();
         queue<string> Parse();
         queue<string> testParse();
