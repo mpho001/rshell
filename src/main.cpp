@@ -35,6 +35,7 @@ int main() {
         // bool determines whether command was successful
         bool comp_status = true;
         char** c;
+	int num = 0;
         Execute ex;
         while (tasks.size() != 0) {
         
@@ -79,9 +80,17 @@ int main() {
 	        }
             
             // simply pop the semicolon and continue looping
-	        else if (tasks.front() == ";") {
-                tasks.pop();
-	        }
+	    else if (tasks.front() == ";") {
+		    tasks.pop();
+	    }
+
+	    //------------------------------------------------------------------
+	    
+	    else if (tasks.front() == "(") {
+		    // gets rid of (
+		    tasks.pop();
+		    
+
 
 
             //-----------------------------------------------------------------
