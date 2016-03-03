@@ -98,9 +98,11 @@ int main() {
 
 	    //------------------------------------------------------------------
 	    
-	    else if (tasks.front() == "(") {
+	//    else if (tasks.front() == "(") {
 		    // gets rid of (
-		    tasks.pop();
+	//	    tasks.pop();
+	//	    num = 1;
+
 		    
 
 
