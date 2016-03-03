@@ -144,7 +144,7 @@ queue<string> Input::Parse() {
 	// would set paren to true letting 
 	// it know that there is a closing
 	// paren to look for
-	else if (token.at(0) == "(") {
+	else if (token.at(0) == '(') {
 	    paren = true;
     	    tasks.push("(");
 	    token.erase(0, 1);
@@ -157,8 +157,8 @@ queue<string> Input::Parse() {
 	// push the token in push the 
 	// ) in and make paren false again
 	// so that it know the braket is closed 
-	else if (paren == true && token.at(token.size() - 1) == ")") {
-    	    token.pop_back();
+	else if (paren == true && token.at(token.size() - 1) == ')') {
+    	    token.erase(token.size()-1);
 	    tasks.push(token);
 	    tasks.push(")");
 	    paren = false;
