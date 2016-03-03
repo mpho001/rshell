@@ -107,7 +107,13 @@ queue<string> Input::Parse() {
                     if (getline(iss, token, ' ')) {
                         tasks.push(token);
                     }
+                    // strLine empty
+                    else {return tasks;}
                 }
+                //else if (token == "&&" || token == "||" || token == ";") {
+                    // push back the token
+                //    break;
+                //}
                 else {
                     tasks.push("-e");
                     tasks.push(token);
@@ -117,8 +123,8 @@ queue<string> Input::Parse() {
             tested = true;
         }        
 
-
-        else if (token == "&&" || token == "||" || token == ";") {
+        // removed else if
+         else if (token == "&&" || token == "||" || token == ";") {
             // pushes whatever cmd was
             if (!tested) {
                 tasks.push(cmd);
@@ -164,7 +170,7 @@ queue<string> Input::Parse() {
             // find position and split up string accordingly
         // }
 
-        else if (!tested) {
+        else { //if (!tested) {
             // check if end of token has semicolon
             // remove the extra spaces
             // cout << "token: " << token << token.size() << endl;
