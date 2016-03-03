@@ -7,6 +7,7 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <pwd.h>
+#include <algorithm>
 
 using namespace std;
 
@@ -35,7 +36,28 @@ void Input::getInput() {
 }
 
 bool Input::isTest() {
-    if (strLine.at(0) == '[') {
+    size_t found = strLine.find('[');
+    if (found != string::npos) {
+        if ( validTest() ) {
+            return true;
+        }
+        return false;
+    }
+    
+    // check if test is first word in string or after connector
+    if (strLine.find("test ") != string::npos) {
+        return true;
+    }
+
+    return false;
+}
+
+// handle error when user puts something like "] [" wtf
+bool Input::validTest() {
+    size_t cntrOpen  = std::count(strLine.begin(), strLine.end(), '[');
+    size_t cntrClose = std::count(strLine.begin(), strLine.end(), ']');
+
+    if (cntrOpen == cntrClose) {
         return true;
     }
     return false;
@@ -67,18 +89,80 @@ queue<string> Input::Parse() {
     string cmd;
     // end used to determine if its end of user input
     bool end = true;
+    bool start = true;
+    // if a connector was just detected
+    bool con = false;
+    // if there is a parentheses
+    bool paren = false;
+    bool tested = false;
+
     // ignores ' '
     while (getline(iss, token, ' ')) {
-        if (token == "&&" || token == "||" || token == ";") {
+
+         if ( (start && token == "test") || (con && token == "test" )) {
+            tasks.push(token);
+            if (getline(iss, token, ' ')) {
+                if (token == "-e" || token == "-f" || token == "-d") {
+                    tasks.push(token);
+                    if (getline(iss, token, ' ')) {
+                        tasks.push(token);
+                    }
+                    // strLine empty
+                    else {return tasks;}
+                }
+                //else if (token == "&&" || token == "||" || token == ";") {
+                    // push back the token
+                //    break;
+                //}
+                else {
+                    tasks.push("-e");
+                    tasks.push(token);
+                }
+            }
+            end = false;
+            tested = true;
+        }        
+
+        // removed else if
+         else if (token == "&&" || token == "||" || token == ";") {
             // pushes whatever cmd was
-            tasks.push(cmd);
+            if (!tested) {
+                tasks.push(cmd);
+            }
             // makes string empty
             cmd.clear();
             // pushes &&, ||, or ;
             tasks.push(token);
             end = false;
+            con = true;
+            tested = false;
         }
         
+	// would see if the first char of token is 
+	// ( then would push ( delete it from
+	// the token then push the actual token in
+	// would set paren to true letting 
+	// it know that there is a closing
+	// paren to look for
+	else if (token.at(0) == "(") {
+	    paren = true;
+    	    tasks.push("(");
+	    token.erase(0, 1);
+	    tasks.push(token);
+	}
+
+	// would check to see if paren is true 
+	// and would see is the last char in
+	// token is ) then would erase ) from token
+	// push the token in push the 
+	// ) in and make paren false again
+	// so that it know the braket is closed 
+	else if (paren == true && token.at(token.size() - 1) == ")") {
+    	    token.pop_back();
+	    tasks.push(token);
+	    tasks.push(")");
+	    paren = false;
+	}	
         // else if not a connector
        
         // else if (strLine.find("&&") != std::string::npos) {
@@ -86,7 +170,7 @@ queue<string> Input::Parse() {
             // find position and split up string accordingly
         // }
 
-        else {
+        else { //if (!tested) {
             // check if end of token has semicolon
             // remove the extra spaces
             // cout << "token: " << token << token.size() << endl;
@@ -115,8 +199,11 @@ queue<string> Input::Parse() {
                 }
                 end = true;
             }
+            con = false;
+            tested = false;
         }
 
+        start = false;
     }
     
     // if no more connectors were detected
