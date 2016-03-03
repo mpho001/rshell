@@ -23,7 +23,7 @@ int main() {
         // exit(0);
         tasks = in.Parse();
 
-        cout << "size: " << tasks.size() << endl;
+        // cout << "size: " << tasks.size() << endl;
 
         // while (tasks.size() != 0) {
         //     cout << tasks.front() << endl;
@@ -103,7 +103,7 @@ int main() {
             else if (tasks.front() == "test") {
                 // pops "test"
                 tasks.pop();
-                test.run(tasks);
+                test.run(tasks, comp_status);
             }
 
             // task was not a connector, and therefore a command 

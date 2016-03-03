@@ -33,7 +33,17 @@ bool Test::isDir(const char* s) {
     return false;
 }
 
-void Test::run(queue<string>& q) {
+bool Test::isCon(string str) {
+    if (str == "&&" || str == "||" || str == ";" || str == "("
+            || str == ")") {
+        return true;
+    }
+    return false;
+}
+
+// if user only inputs test, thats true, because
+// we add the -e, in bash thats true...?
+void Test::run(queue<string>& q, bool& worked) {
     // if no arguments after flag, then true
     // so, check it end of queue
     // or if a connector been detected
@@ -42,13 +52,20 @@ void Test::run(queue<string>& q) {
     if (q.front() == "-e") {  
         q.pop();
         if (q.size() == 0) { return; }
+        if (isCon(q.front())) {
+            cout << "(True)" << endl;
+            worked = true;
+            return;
+        }
         const char* s = q.front().c_str();
         cout << "directory: " << q.front() << endl;
         if (exists(s)) {
             cout << "(True)" << endl;
+            worked = true; 
         }
         else {
             cout << "(False)" << endl;
+            worked = false;
         }
         q.pop();
     }
@@ -60,13 +77,16 @@ void Test::run(queue<string>& q) {
        if (exists(s)) {
            if (isReg(s)) {
                cout << "(True)" << endl;
+               worked = true;
            } 
            else {
                cout << "(False)" << endl;
+               worked = false;
            }
        }
        else {
            cout << "(False)" << endl;
+           worked = false;
        }
        q.pop();
     }
@@ -78,13 +98,16 @@ void Test::run(queue<string>& q) {
         if (exists(s)) {
             if (isDir(s)) {
                 cout << "(True)" << endl;
+                worked = true;
             }
             else {
                 cout << "(False)" << endl;
+                worked = false;
             }
         }
         else {
             cout << "(False)" << endl;
+            worked = false;
         }
         q.pop();
     }
