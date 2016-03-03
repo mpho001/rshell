@@ -105,6 +105,11 @@ queue<string> Input::Parse() {
                     if (getline(iss, token, ' ')) {
                         tasks.push(token);
                     }
+                    // strLine empty
+                    else {return tasks;}
+                }
+                else if (token == "&&" || token == "||" || token == ";") {
+                    break;
                 }
                 else {
                     tasks.push("-e");
@@ -115,8 +120,8 @@ queue<string> Input::Parse() {
             tested = true;
         }        
 
-
-        else if (token == "&&" || token == "||" || token == ";") {
+        // removed else if
+        if (token == "&&" || token == "||" || token == ";") {
             // pushes whatever cmd was
             if (!tested) {
                 tasks.push(cmd);

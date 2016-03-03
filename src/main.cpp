@@ -77,6 +77,10 @@ int main() {
 			        if(tasks.size() != 0) {
                         if (tasks.front() == "test") {
                             // delete all of test
+                            while (tasks.size() != 0 && tasks.front() != "&&" &&
+                                    tasks.front() != "||" && tasks.front() != ";") {
+                                tasks.pop();
+                            }
                         }
                         else if (tasks.front() != "&&" || tasks.front() != "||"
                                 || tasks.front() != ";") {

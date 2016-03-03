@@ -43,6 +43,7 @@ void Test::run(queue<string>& q) {
         q.pop();
         if (q.size() == 0) { return; }
         const char* s = q.front().c_str();
+        cout << "directory: " << q.front() << endl;
         if (exists(s)) {
             cout << "(True)" << endl;
         }
