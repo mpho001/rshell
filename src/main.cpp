@@ -62,7 +62,14 @@ int main() {
                 // delete the next commands so that they wont run if
                 // the command before fails  
 		            if(tasks.size() != 0) {
-			            if(tasks.front() != "&&" || tasks.front() != "||" ||
+                        if (tasks.front() == "test") {
+                            // delete all of test
+                            while (tasks.size() != 0 && tasks.front() != "&&" &&
+                                    tasks.front() != "||" && tasks.front() != ";") {
+                                tasks.pop();
+                            }
+                        } 
+                        else if(tasks.front() != "&&" || tasks.front() != "||" ||
                                 tasks.front() != ";") {
 				            tasks.pop();
 			            }
@@ -101,6 +108,7 @@ int main() {
 	    else if (tasks.front() == "(") {
 		    // gets rid of (
 		    tasks.pop();
+        }
 		    
 
 

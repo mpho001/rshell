@@ -102,7 +102,6 @@ queue<string> Input::Parse() {
 
     // ignores ' '
     while (getline(iss, token, ' ')) {
-
          if ( (start && token == "test") || (con && token == "test" )) {
             tasks.push(token);
             if (getline(iss, token, ' ')) {
@@ -142,18 +141,35 @@ queue<string> Input::Parse() {
             tested = false;
         }
         
+        // if you see [, keep reading til you see ]
+        else if ( (start && token == "[") || (con && token == "[") ) {
+            tasks.push(token);
+            while (token != "]") {
+                if (getline(iss, token, ' ')) {
+                    tasks.push(token);
+                }
+                // empty
+                else {return tasks;}
+            }
+            end = false;
+            con = false;
+            tested = false;
+        }
+
+
+        
 	// would see if the first char of token is 
 	// ( then would push ( delete it from
 	// the token then push the actual token in
 	// would set paren to true letting 
 	// it know that there is a closing
 	// paren to look for
-	else if (token.at(0) == "(") {
-	    paren = true;
-    	    tasks.push("(");
-	    token.erase(0, 1);
-	    tasks.push(token);
-	}
+//	else if (token.at(0) == "(") {
+//	    paren = true;
+//    	    tasks.push("(");
+//	    token.erase(0, 1);
+//	    tasks.push(token);
+//	}
 
 	// would check to see if paren is true 
 	// and would see is the last char in
@@ -161,12 +177,12 @@ queue<string> Input::Parse() {
 	// push the token in push the 
 	// ) in and make paren false again
 	// so that it know the braket is closed 
-	else if (paren == true && token.at(token.size() - 1) == ")") {
-    	    token.pop_back();
-	    tasks.push(token);
-	    tasks.push(")");
-	    paren = false;
-	}	
+//	else if (paren == true && token.at(token.size() - 1) == ")") {
+//    	    token.pop_back();
+//	    tasks.push(token);
+//	    tasks.push(")");
+//	    paren = false;
+//	}	
         // else if not a connector
        
         // else if (strLine.find("&&") != std::string::npos) {
