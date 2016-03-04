@@ -33,6 +33,7 @@ bool Test::isDir(const char* s) {
     return false;
 }
 
+// checks if it's a connector
 bool Test::isCon(string str) {
     if (str == "&&" || str == "||" || str == ";" || str == "("
             || str == ")") {
@@ -50,7 +51,7 @@ void Test::run(queue<string>& q, bool& worked) {
     // so, check it end of queue
     // or if a connector been detected
     
-    // when ONLY "test" is entered
+    // when ONLY "test" is entered or test and connector
     if (q.size() == 0 || isCon(q.front())) {
         cout << "(False)" << endl;
         worked = false;
@@ -59,15 +60,11 @@ void Test::run(queue<string>& q, bool& worked) {
 
     if (q.front() == "-e") {  
         q.pop();
-        if (q.size() == 0) { 
+        // removed additional true if for isCon
+        if (q.size() == 0 || isCon(q.front())) { 
             cout << "(True)" << endl;
             worked = true; 
             return; 
-        }
-        if (isCon(q.front())) {
-            cout << "(True)" << endl;
-            worked = true;
-            return;
         }
 
         // keep checking
@@ -80,7 +77,6 @@ void Test::run(queue<string>& q, bool& worked) {
 
         // const char* s = q.front().c_str();
         const char* s = dir.c_str();
-        // cout << "directory: " << q.front() << endl;
         if (exists(s)) {
             cout << "(True)" << endl;
             worked = true; 
@@ -94,8 +90,20 @@ void Test::run(queue<string>& q, bool& worked) {
 
     else if (q.front() == "-f") {
        q.pop();
-       if (q.size() == 0) { return; }
-       const char* s = q.front().c_str();
+       if (q.size() == 0 || isCon(q.front())) { 
+           cout << "(True)" << endl;
+           worked = true;
+           return; 
+       }
+
+       // keep checking
+       string dir;
+       while (q.size() != 0 && !(isCon(q.front()))) {
+           dir += q.front();
+           q.pop();
+       }
+
+       const char* s = dir.c_str();
        if (exists(s)) {
            if (isReg(s)) {
                cout << "(True)" << endl;
@@ -110,13 +118,25 @@ void Test::run(queue<string>& q, bool& worked) {
            cout << "(False)" << endl;
            worked = false;
        }
-       q.pop();
+       // q.pop();
     }
 
     else if (q.front() == "-d") {
         q.pop();
-        if (q.size() == 0) { return; }
-        const char* s = q.front().c_str();
+        if (q.size() == 0 || isCon(q.front())) {
+            cout << "(True)" << endl;
+            worked = true;
+            return; 
+        }
+
+        // keep checking
+        string dir;
+        while (q.size() != 0 && !(isCon(q.front()))) {
+            dir += q.front();
+            q.pop();
+        }
+
+        const char* s = dir.c_str();
         if (exists(s)) {
             if (isDir(s)) {
                 cout << "(True)" << endl;
@@ -131,7 +151,7 @@ void Test::run(queue<string>& q, bool& worked) {
             cout << "(False)" << endl;
             worked = false;
         }
-        q.pop();
+        // q.pop();
     }
 
 }
