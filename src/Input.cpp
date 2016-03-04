@@ -113,12 +113,11 @@ queue<string> Input::Parse() {
                     // strLine empty
                     else {return tasks;}
                 }
-                //else if (token == "&&" || token == "||" || token == ";") {
-                    // push back the token
-                //    break;
-                //}
-                else {
+                else if (token != "&&" && token != "||" && token != ";") {
                     tasks.push("-e");
+                    tasks.push(token);
+                }
+                else if (token == "&&" || token == "||" || token == ";") {
                     tasks.push(token);
                 }
             }

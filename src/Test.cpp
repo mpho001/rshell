@@ -49,15 +49,21 @@ void Test::run(queue<string>& q, bool& worked) {
     // if no arguments after flag, then true
     // so, check it end of queue
     // or if a connector been detected
-
-    if (q.size() == 0) {
+    
+    // when ONLY "test" is entered
+    if (q.size() == 0 || isCon(q.front())) {
         cout << "(False)" << endl;
         worked = false;
         return;
     }
+
     if (q.front() == "-e") {  
         q.pop();
-        if (q.size() == 0) { return; }
+        if (q.size() == 0) { 
+            cout << "(True)" << endl;
+            worked = true; 
+            return; 
+        }
         if (isCon(q.front())) {
             cout << "(True)" << endl;
             worked = true;
