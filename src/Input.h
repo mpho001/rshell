@@ -27,6 +27,7 @@ class Input {
         queue<string> Parse();
         queue<string> testParse();
         char** toChar(string a);
+        void semicolon(queue<string>& q, string s);
 };
 
 #endif

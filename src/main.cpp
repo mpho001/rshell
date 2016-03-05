@@ -23,14 +23,14 @@ int main() {
         // exit(0);
         tasks = in.Parse();
 
-        // cout << "size: " << tasks.size() << endl;
+         cout << "size: " << tasks.size() << endl;
 
-        // while (tasks.size() != 0) {
-        //     cout << tasks.front() << endl;
-        //     tasks.pop();
-        // }
+         //while (tasks.size() != 0) {
+         //    cout << tasks.front() << endl;
+         //    tasks.pop();
+         //}
 
-        // exit(0);
+         //exit(0);
         
         // bool determines whether command was successful
         bool comp_status = true;
@@ -65,12 +65,12 @@ int main() {
                         if (tasks.front() == "test") {
                             // delete all of test
                             while (tasks.size() != 0 && tasks.front() != "&&" &&
-                                    tasks.front() != "||" && tasks.front() != ";") {
+                                tasks.front() != "||" && tasks.front() != ";") {
                                 tasks.pop();
                             }
                         } 
-                        else if(tasks.front() != "&&" || tasks.front() != "||" ||
-                                tasks.front() != ";") {
+                        else if(tasks.front() != "&&" || tasks.front() != "||" 
+                                || tasks.front() != ";") {
 				            tasks.pop();
 			            }
 		            }
@@ -86,7 +86,7 @@ int main() {
                         if (tasks.front() == "test") {
                             // delete all of test
                             while (tasks.size() != 0 && tasks.front() != "&&" &&
-                                    tasks.front() != "||" && tasks.front() != ";") {
+                                tasks.front() != "||" && tasks.front() != ";") {
                                 tasks.pop();
                             }
                         }
@@ -117,7 +117,7 @@ int main() {
             
             
             // the user wants to test
-            else if (tasks.front() == "test") {
+            else if (tasks.front() == "test" || tasks.front() == "[") {
                 // pops "test"
                 tasks.pop();
                 test.run(tasks, comp_status);

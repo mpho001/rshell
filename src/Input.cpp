@@ -67,6 +67,18 @@ void Input::brackTest() {
     // handles [ ]
 }
 
+// if semicolon, erase 
+void Input::semicolon(queue<string>& q, string s) {
+    if (s.size() != 0 && s.at(s.size()-1) == ';') {
+        s.erase(s.size()-1);
+        q.push(s);
+        q.push(";");
+    }
+    else {
+        q.push(s);
+    }
+}
+
 
 // returns a queue of parsed string
 queue<string> Input::Parse() {
@@ -108,17 +120,20 @@ queue<string> Input::Parse() {
                 if (token == "-e" || token == "-f" || token == "-d") {
                     tasks.push(token);
                     if (getline(iss, token, ' ')) {
-                        tasks.push(token);
+                        // tasks.push(token);
+                        semicolon(tasks, token);
                     }
                     // strLine empty
                     else {return tasks;}
                 }
                 else if (token != "&&" && token != "||" && token != ";") {
                     tasks.push("-e");
-                    tasks.push(token);
+                    // tasks.push(token);
+                    semicolon(tasks, token);
                 }
                 else if (token == "&&" || token == "||" || token == ";") {
-                    tasks.push(token);
+                    // tasks.push(token);
+                    semicolon(tasks, token);
                 }
             }
             end = false;
@@ -145,7 +160,8 @@ queue<string> Input::Parse() {
             tasks.push(token);
             while (token != "]") {
                 if (getline(iss, token, ' ')) {
-                    tasks.push(token);
+                    // tasks.push(token);
+                    semicolon(tasks, token);
                 }
                 // empty
                 else {return tasks;}
