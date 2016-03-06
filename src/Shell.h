@@ -6,6 +6,7 @@
 #include <sys/stat.h>
 #include <unistd.h>
 #include <queue>
+#include <stack>
 
 using namespace std;
 
@@ -16,6 +17,12 @@ class Shell {
         // Constructor and destructor
         Shell() {} ;
         ~Shell() {} ;
+        bool isCon(string str) {
+            if (str == "&&" || str == "||" || str == ";") {
+                return true;
+            }
+            return false;
+        }
 };
 
 class Execute: public Shell {
@@ -34,10 +41,20 @@ class Test: public Shell {
         bool isReg(const char* s);
         bool isDir(const char* s);
         // is con will see if it's a connector
-        bool isCon(string str);
-        void run(queue<string>& q, bool& worked);
+        // bool isCon(string str);
+        void run(queue<string>& q, bool& worked, bool brack);
 };
 
+class Connector: public Shell {
+    private:
+        stack<string> par;
+    public:
+        Connector(): Shell() {};
+        void amp(queue<string>& q, bool status);
+        void orr(queue<string>& q, bool status);
+        void semi(queue<string>& q);
+        void popPar(queue<string>& q);
+};
 
 #endif
 
