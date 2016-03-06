@@ -53,6 +53,12 @@ void Test::run(queue<string>& q, bool& worked, bool brack) {
     // or if a connector been detected
     //
     
+    bool there;
+    if (brack) {
+        there = true;
+    }
+
+
     // when ONLY "test" is entered or test and connector
     if (q.size() == 0 || isCon(q.front())) {
         cout << "(False)" << endl;
@@ -104,7 +110,7 @@ void Test::run(queue<string>& q, bool& worked, bool brack) {
             }
         }
 
-        if (!brack) {
+        if (!brack && there) {
             cout << "(False)" << endl;
             worked = false;
             return;
@@ -159,7 +165,7 @@ void Test::run(queue<string>& q, bool& worked, bool brack) {
            }
        }
 
-       if (!brack) {
+       if (!brack && there) {
            cout << "(False)" << endl;
            worked = false;
            return;
@@ -207,13 +213,21 @@ void Test::run(queue<string>& q, bool& worked, bool brack) {
         // keep checking
         string dir;
         while (q.size() != 0 && !(isCon(q.front()))) {
+            brack = false;
             if (q.front() == "]") {
                 q.pop();
+                brack = true;
             }
             else {
                 dir += q.front();
                 q.pop();
             }
+        }
+
+        if (!brack && there) {
+            cout << "(False)" << endl;
+            worked = false;
+            return;
         }
 
         const char* s = dir.c_str();

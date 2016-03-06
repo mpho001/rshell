@@ -25,12 +25,12 @@ int main() {
 
         cout << "size: " << tasks.size() << endl;
 
-        // while (tasks.size() != 0) {
-        //     cout << tasks.front() << endl;
-        //     tasks.pop();
-        // }
+        while (tasks.size() != 0) {
+            cout << tasks.front() << endl;
+            tasks.pop();
+        }
 
-        // exit(0);
+        exit(0);
         
         // bool determines whether command was successful
         bool comp_status = true;
@@ -55,7 +55,7 @@ int main() {
 
 
         while (tasks.size() != 0) {
-//		cout << tasks.front() << " check" << endl;
+            // cout << tasks.front() << " check" << endl;
             // if at any point the user has exit
             if (tasks.front() == "exit") {
                 cout << "You have exited shell." << endl;
@@ -68,8 +68,8 @@ int main() {
 	            tasks.pop(); //gets rid of the &&
                 // if the command before this one does returns F,then dont do
                 // //the next command
-		    hash = 0;
-		    if(comp_status == false) {
+		        hash = 0;
+		        if(comp_status == false) {
 		        // so the && connector should have already been deleted,
                 // this is a while loop to
                 // delete the next commands so that they wont run if
@@ -84,23 +84,24 @@ int main() {
                         } 
                         else if(tasks.front() != "&&" || tasks.front() != "||" 
                                 || tasks.front() != ";") {
-				if (tasks.front() == "(") {
-					int count = 1;
-					tasks.pop();
-					while (count != 0) {
-						if (tasks.front() == "(") {
-							count++;
-						}
-						else if (tasks.front() == ")") {
-							count = count - 1;
-						}
-						tasks.pop();
-					}
-				}
-			}
-		}
-	}
-}
+				            if (tasks.front() == "(") {
+					            int count = 1;
+					            tasks.pop();
+					            while (count != 0) {
+						            if (tasks.front() == "(") {
+							            count++;
+						            }
+						            else if (tasks.front() == ")") {
+							            count = count - 1;
+						            }
+						            // tasks.pop();
+					            }
+				            }   
+                            tasks.pop();
+			            }
+		            }
+	            }
+            }
 
             //------------------------------------------------------------------
 
@@ -122,28 +123,31 @@ int main() {
 					else if (tasks.front() != "&&" || tasks.front() != "||" ||
                             tasks.front() != ";") {
 				 	        if (tasks.front() == "(") {
-							int count = 1;
-							tasks.pop();
-							while (count != 0) {
-								if (tasks.front() == "(") {
-									count++;
-								}
-								else if (tasks.front() == ")") {
-									count = count - 1;
-								}
-								tasks.pop();
-						}
-			  	        }
-		  	        }   
-		        }
+							    int count = 1;
+							    tasks.pop();
+							    while (count != 0) {
+								    if (tasks.front() == "(") {
+									    count++;
+								    }
+								    else if (tasks.front() == ")") {
+									    count = count - 1;
+								    }
+								    tasks.pop();
+						        }
+			  	            }
+                            if (tasks.size() != 0) {
+                                tasks.pop();
+                            }
+		  	            }      
+		            }
+	            }
 	        }
-	    }
             
             // simply pop the semicolon and continue looping
-	    else if (tasks.front() == ";") {
-		    tasks.pop();
+	        else if (tasks.front() == ";") {
+		        tasks.pop();
 
-	    }
+	        }
 
 	    //------------------------------------------------------------------
 	    
@@ -384,6 +388,7 @@ int main() {
 			    
 			    if (tasks.size() == 0)
 			    {
+                    cout << "what the" << endl;
 				    perror("not enough parentheses");
 				    exit(0);
 			    }
