@@ -196,7 +196,14 @@ queue<string> Input::Parse() {
 	            // tasks.push(token);
 
                 if (cmd.empty() && !token.empty() && token.at(0) != '(') {
-                    cmd = token;
+                    if (token.at(token.size()-1) == ';') {
+                        token.erase(token.size()-1);
+                        tasks.push(token);
+                        tasks.push(";");
+                    }
+                    else {
+                        cmd = token;
+                    }
                 }
                 else if (!cmd.empty()) {
                     cmd += " " + token;
@@ -245,11 +252,6 @@ queue<string> Input::Parse() {
 	    }	
         // else if not a connector
        
-        // else if (strLine.find("&&") != std::string::npos) {
-        //     cout << "found &&" << endl;
-            // find position and split up string accordingly
-        // }
-
         else { //if (!tested) {
             // check if end of token has semicolon
             // remove the extra spaces
