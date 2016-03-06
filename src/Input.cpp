@@ -189,11 +189,11 @@ queue<string> Input::Parse() {
     	        tasks.push("(");
 	            token.erase(0, 1);
 	            // tasks.push(token);
-                if (cmd.empty()) {
+                if (cmd.empty() && !token.empty() && token.at(0) != '(') {
                     cmd = token;
                 }
-                else {
-                    cmd = " " + token;
+                else if (!cmd.empty()) {
+                    cmd += " " + token;
                 }
             }
             end = false;
@@ -207,19 +207,30 @@ queue<string> Input::Parse() {
 	    // ) in and make paren false again
 	    // so that it know the braket is closed 
 	    else if (paren == true && token.at(token.size() - 1) == ')') {
+            int count = 0;
             while (token.at(token.size() - 1) == ')') {
                 token.erase(token.size()-1);
-                if (cmd.empty()) {
-                    tasks.push(token);
+                ++count;
+                if (cmd.empty() && !token.empty() && token.at(0) != ')') {
+                    // cout << "1: " << token << endl;
+                    // tasks.push(token);
+                    cmd = token;
                 }
-                else {
-                    tasks.push(cmd + " " + token);
-                    cmd.clear();
+                else if (!cmd.empty() && token.at(token.size()-1) != ')') {
+                    // tasks.push(cmd + " " + token);
+                    // cmd.clear();
+                    cmd += " " + token;
                 }
 	            // tasks.push(token);
-	            tasks.push(")");
+	            // tasks.push(")");
             }
+            tasks.push(cmd);
+            cmd.clear();
 	        // paren = false;
+            while (count != 0) {
+                tasks.push(")");
+                count -= 1;
+            }
             end = false;
             con = false;
 	    }	
