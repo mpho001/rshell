@@ -161,13 +161,18 @@ queue<string> Input::Parse() {
         // if you see [, keep reading til you see ]
         else if ( (start && token == "[") || (con && token == "[") ) {
             tasks.push(token);
+            bool flag = false;
             while (token != "]") {
                 if (getline(iss, token, ' ')) {
                     // tasks.push(token);
+                    if (token != "-e" && token != "-f" && token != "-d" && !flag) {
+                        tasks.push("-e");
+                    };
                     semicolon(tasks, token);
                 }
                 // empty
                 else {return tasks;}
+                flag = true;
             }
             end = false;
             con = false;
@@ -189,6 +194,7 @@ queue<string> Input::Parse() {
     	        tasks.push("(");
 	            token.erase(0, 1);
 	            // tasks.push(token);
+
                 if (cmd.empty() && !token.empty() && token.at(0) != '(') {
                     cmd = token;
                 }
@@ -196,7 +202,8 @@ queue<string> Input::Parse() {
                     cmd += " " + token;
                 }
             }
-            end = false;
+            // end = false;
+            end = true;
             con = false;
 	    }
 
@@ -208,6 +215,7 @@ queue<string> Input::Parse() {
 	    // so that it know the braket is closed 
 	    else if (paren == true && token.at(token.size() - 1) == ')') {
             int count = 0;
+            paren = false;
             while (token.at(token.size() - 1) == ')') {
                 token.erase(token.size()-1);
                 ++count;
@@ -224,7 +232,8 @@ queue<string> Input::Parse() {
 	            // tasks.push(token);
 	            // tasks.push(")");
             }
-            tasks.push(cmd);
+            // tasks.push(cmd);
+            semicolon(tasks, cmd);
             cmd.clear();
 	        // paren = false;
             while (count != 0) {
@@ -279,7 +288,14 @@ queue<string> Input::Parse() {
     }
     
     // if no more connectors were detected
-    if (end) {
+    if (end && paren) {
+        if (cmd.at(cmd.size() - 1) == ')') {
+            cmd.erase(cmd.size()-1);
+            semicolon(tasks, cmd);
+            tasks.push(")");
+        }
+    }
+    else if (end) {
         tasks.push(cmd);
     }
 
