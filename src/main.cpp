@@ -34,6 +34,8 @@ int main() {
         
         // bool determines whether command was successful
         bool comp_status = true;
+	bool comp_status2 = false;
+	bool check = false;
         char** c;
 	    // int num = 0;
         Execute ex;
@@ -83,15 +85,13 @@ int main() {
 		        tasks.pop();  // gets rid of the || 
 		        if(comp_status == true) {
 			        if(tasks.size() != 0) {
-                        if (tasks.front() == "test") {
-                            // delete all of test
-                            while (tasks.size() != 0 && tasks.front() != "&&" &&
-                                tasks.front() != "||" && tasks.front() != ";") {
-                                tasks.pop();
-                            }
-                        }
-                        else if (tasks.front() != "&&" || tasks.front() != "||"
-                                || tasks.front() != ";") {
+					if (tasks.front() == "test") {
+					       	// delete all of test 
+						   while (tasks.size() != 0 && tasks.front() != "&&" && tasks.front() != "||" && tasks.front() != ";") { 
+							   tasks.pop();
+						   }
+					}
+					else if (tasks.front() != "&&" || tasks.front() != "||" || tasks.front() != ";") {
 				 	        tasks.pop();
 			  	        }
 		  	        }   
@@ -108,7 +108,9 @@ int main() {
 	    else if (tasks.front() == "(") {
 		    // gets rid of (
 		    tasks.pop();
-        }
+		    while (task.front() != ")" && check == false) {
+			    if (tasks.front() == "&&") {
+				    amp(task.front(),
 		    
 
 
