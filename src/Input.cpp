@@ -141,15 +141,18 @@ queue<string> Input::Parse() {
         }        
 
         // removed else if
-         else if (token == "&&" || token == "||" || token == ";") {
+         else if (token == "&&" || token == "||" || token == ";"  || 
+                 token == "(" || token == ")") {
             // pushes whatever cmd was
-            if (!tested) {
+            // if (!tested) {
+            if (!cmd.empty()) {
                 tasks.push(cmd);
             }
             // makes string empty
             cmd.clear();
             // pushes &&, ||, or ;
             tasks.push(token);
+            if (token == "(") {paren = true;}
             end = false;
             con = true;
             tested = false;
@@ -179,11 +182,20 @@ queue<string> Input::Parse() {
 	// would set paren to true letting 
 	// it know that there is a closing
 	// paren to look for
+
 	else if (token.at(0) == '(') {
 	    paren = true;
-    	    tasks.push("(");
+    	tasks.push("(");
 	    token.erase(0, 1);
-	    tasks.push(token);
+	    // tasks.push(token);
+        if (cmd.empty()) {
+            cmd = token;
+        }
+        else {
+            cmd = " " + token;
+        }
+        end = false;
+        con = false;
 	}
 
 	// would check to see if paren is true 
@@ -192,12 +204,21 @@ queue<string> Input::Parse() {
 	// push the token in push the 
 	// ) in and make paren false again
 	// so that it know the braket is closed 
-	else if (paren == true && token.at(token.size() - 1) == ')') {
+	    else if (paren == true && token.at(token.size() - 1) == ')') {
     	    token.erase(token.size()-1);
-	    tasks.push(token);
-	    tasks.push(")");
-	    paren = false;
-	}	
+            if (cmd.empty()) {
+                tasks.push(token);
+            }
+            else {
+                tasks.push(cmd + " " + token);
+                cmd.clear();
+            }
+	        // tasks.push(token);
+	        tasks.push(")");
+	        paren = false;
+            end = false;
+            con = false;
+	    }	
         // else if not a connector
        
         // else if (strLine.find("&&") != std::string::npos) {
@@ -221,6 +242,7 @@ queue<string> Input::Parse() {
                 tasks.push(";");
                 end = false;
             }
+
             
             // check if connectors are hidden in words
             

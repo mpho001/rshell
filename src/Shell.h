@@ -54,6 +54,11 @@ class Connector: public Shell {
         void orr(queue<string>& q, bool status);
         void semi(queue<string>& q);
         void popPar(queue<string>& q);
+        void clearStack() {
+            while (!par.empty()) {
+                par.pop();
+            }
+        }
 };
 
 #endif

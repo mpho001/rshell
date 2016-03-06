@@ -25,12 +25,12 @@ int main() {
 
          cout << "size: " << tasks.size() << endl;
 
-         //while (tasks.size() != 0) {
-         //    cout << tasks.front() << endl;
-         //    tasks.pop();
-         //}
+         while (tasks.size() != 0) {
+             cout << tasks.front() << endl;
+             tasks.pop();
+         }
 
-         //exit(0);
+         exit(0);
         
         // bool determines whether command was successful
         bool comp_status = true;
