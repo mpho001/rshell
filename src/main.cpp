@@ -25,24 +25,24 @@ int main() {
 
         cout << "size: " << tasks.size() << endl;
 
-        while (tasks.size() != 0) {
-            cout << tasks.front() << endl;
-            tasks.pop();
-        }
+        // while (tasks.size() != 0) {
+        //     cout << tasks.front() << endl;
+        //     tasks.pop();
+        // }
 
-        exit(0);
+        // exit(0);
         
         // bool determines whether command was successful
         bool comp_status = true;
-	    bool comp_status2 = false;
-	    bool comp_status3 = false;
-	    bool comp_status4 = false;
-	    bool comp_status5 = false;
-	    bool comp_status6 = false;
-	    bool comp_status7 = false;
-	    bool comp_status8 = false;
-	    bool comp_status9 = false;
-	    bool comp_status10 = false;
+	    bool comp_status2 = true;
+	    bool comp_status3 = true;
+	    bool comp_status4 = true;
+	    bool comp_status5 = true;
+	    bool comp_status6 = true;
+	    bool comp_status7 = true;
+	    bool comp_status8 = true;
+	    bool comp_status9 = true;
+	    bool comp_status10 = true;
 	    int hash = -1;
         //	bool check = false;
 	    Connector con;
@@ -331,66 +331,156 @@ int main() {
 
 				    if (num == 9) {
 	//				    cout << "little exec2" << endl;
-					    c = in.toChar(tasks.front());
-					    ex.execute(c, comp_status10);
-					    tasks.pop();
+                        if (tasks.front() == "test" || tasks.front() == "[") {
+                            bool brack = false;
+                            if (tasks.front() == "[") {
+                                brack = true;
+                            }
+                            tasks.pop();
+                            test.run(tasks, comp_status10, brack); 
+                        }
+                        else {
+					        c = in.toChar(tasks.front());
+					        ex.execute(c, comp_status10);
+					        tasks.pop();
+                        }
 				    }
 				    else if (num == 8) {
 	//				    cout << "little exec2" << endl;
-					    c = in.toChar(tasks.front());
-					    ex.execute(c, comp_status9);
-					    tasks.pop();
+                        if (tasks.front() == "test" || tasks.front() == "[") {
+                            bool brack = false;
+                            if (tasks.front() == "[") {
+                                brack = true;
+                            }
+                            tasks.pop();
+                            test.run(tasks, comp_status9, brack); 
+                        }
+                        else {
+					        c = in.toChar(tasks.front());
+					        ex.execute(c, comp_status9);
+					        tasks.pop();
+                        } 
 				    }
 				    else if (num == 7) {
 	//				    cout << "little exec2" << endl;
-					    c = in.toChar(tasks.front());
-					    ex.execute(c, comp_status8);
-					    tasks.pop();
+                        if (tasks.front() == "test" || tasks.front() == "[") {
+                            bool brack = false;
+                            if (tasks.front() == "[") {
+                                brack = true;
+                            }
+                            tasks.pop();
+                            test.run(tasks, comp_status8, brack); 
+                        }
+                        else {
+					        c = in.toChar(tasks.front());
+					        ex.execute(c, comp_status8);
+					        tasks.pop();
+                        } 
 				    }
 				    else if (num == 6) {
 	//				    cout << "little exec2" << endl;
-					    c = in.toChar(tasks.front());
-					    ex.execute(c, comp_status7);
-					    tasks.pop();
+                        if (tasks.front() == "test" || tasks.front() == "[") {
+                            bool brack = false;
+                            if (tasks.front() == "[") {
+                                brack = true;
+                            }
+                            tasks.pop();
+                            test.run(tasks, comp_status7, brack); 
+                        }
+                        else {
+					        c = in.toChar(tasks.front());
+					        ex.execute(c, comp_status7);
+					        tasks.pop();
+                        } 
 				    }
 				    else if (num == 5) {
 	//				    cout << "little exec2" << endl;
-					    c = in.toChar(tasks.front());
-					    ex.execute(c, comp_status6);
-					    tasks.pop();
+                        if (tasks.front() == "test" || tasks.front() == "[") {
+                            bool brack = false;
+                            if (tasks.front() == "[") {
+                                brack = true;
+                            }
+                            tasks.pop();
+                            test.run(tasks, comp_status6, brack); 
+                        }
+                        else {
+					        c = in.toChar(tasks.front());
+					        ex.execute(c, comp_status6);
+					        tasks.pop();
+                        } 
 				    }
 				    else if (num == 4) {
 	//				    cout << "little exec2" << endl;
-					    c = in.toChar(tasks.front());
-					    ex.execute(c, comp_status5);
-					    tasks.pop();
+                        if (tasks.front() == "test" || tasks.front() == "[") {
+                            bool brack = false;
+                            if (tasks.front() == "[") {
+                                brack = true;
+                            }
+                            tasks.pop();
+                            test.run(tasks, comp_status5, brack); 
+                        }
+                        else {
+					        c = in.toChar(tasks.front());
+					        ex.execute(c, comp_status5);
+					        tasks.pop();
+                        }
 				    }
 				    else if (num == 3) {
 	//				    cout << "little exec2" << endl;
-					    c = in.toChar(tasks.front());
-					    ex.execute(c, comp_status4);
-					    tasks.pop();
+                        if (tasks.front() == "test" || tasks.front() == "[") {
+                            bool brack = false;
+                            if (tasks.front() == "[") {
+                                brack = true;
+                            }
+                            tasks.pop();
+                            test.run(tasks, comp_status4, brack); 
+                        }
+                        else {
+					        c = in.toChar(tasks.front());
+					        ex.execute(c, comp_status4);
+					        tasks.pop();
+                        }
 				    }
 				    else if (num == 2) {
 	//				    cout << "little exec2" << endl;
-					    c = in.toChar(tasks.front());
-					    ex.execute(c, comp_status3);
-					    tasks.pop();
+                        if (tasks.front() == "test" || tasks.front() == "[") {
+                            bool brack = false;
+                            if (tasks.front() == "[") {
+                                brack = true;
+                            }
+                            tasks.pop();
+                            test.run(tasks, comp_status3, brack); 
+                        }
+                        else {
+					        c = in.toChar(tasks.front());
+					        ex.execute(c, comp_status3);
+					        tasks.pop();
+                        }
 				    }
 
 				    else if (num == 1) {
-	//				    cout << "little exec1" << endl;
-					    c = in.toChar(tasks.front());
-					    ex.execute(c, comp_status2);
-					    tasks.pop();
+                        cout << "little exec1" << endl;
+                        if (tasks.front() == "test" || tasks.front() == "[") {
+                            bool brack = false;
+                            if (tasks.front() == "[") {
+                                brack = true;
+                            }
+                            tasks.pop();
+                            test.run(tasks, comp_status2, brack); 
+                        }
+                        else {
+					        c = in.toChar(tasks.front());
+					        ex.execute(c, comp_status2);
+					        tasks.pop();
+                        }
 				    }
 			    }
 			    
 			    if (tasks.size() == 0)
 			    {
-                    cout << "what the" << endl;
-				    perror("not enough parentheses");
-				    exit(0);
+				    // perror("not enough parentheses");
+				    // exit(0);
+                    break;
 			    }
 
 
@@ -403,6 +493,8 @@ int main() {
 		    else {
 			    comp_status = true;
 		    }
+
+            cout << comp_status << endl;
 		   
 	    }
 
