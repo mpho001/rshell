@@ -25,17 +25,19 @@ int main() {
 
          cout << "size: " << tasks.size() << endl;
 
-         while (tasks.size() != 0) {
-             cout << tasks.front() << endl;
-             tasks.pop();
-         }
+        // while (tasks.size() != 0) {
+          //   cout << tasks.front() << endl;
+            // tasks.pop();
+        // }
 
-         exit(0);
+        // exit(0);
         
         // bool determines whether command was successful
         bool comp_status = true;
 	bool comp_status2 = false;
+	bool comp_status3 = false;
 	bool check = false;
+	Connector con;
         char** c;
 	    // int num = 0;
         Execute ex;
@@ -108,9 +110,77 @@ int main() {
 	    else if (tasks.front() == "(") {
 		    // gets rid of (
 		    tasks.pop();
-		    while (task.front() != ")" && check == false) {
+		    while (tasks.front() != ")" && check == false) {
 			    if (tasks.front() == "&&") {
-				    amp(task.front(),
+				   if (check == false) {
+					   con.amp(tasks, comp_status2);
+				   }
+				   else {
+					   con.amp(tasks, comp_status3);
+				   }
+
+			    }
+
+			    else if (tasks.front() == "||") {
+				    if (check == false) {
+					    con.orr(tasks, comp_status2);
+				    }
+
+				    else {
+					    con.orr(tasks, comp_status3);
+				    }
+
+			    }
+
+			    else if (tasks.front() == ";") {
+				   con.semi(tasks);
+			    }
+			    
+			    else if (tasks.front() == "(") {
+				    tasks.pop();
+				    check = true;
+			    }
+
+			    else if (tasks.front() == ")" && check == true) {
+				    tasks.pop();
+				    if (comp_status3 == false) {
+					    comp_status2 = false;
+				    }
+				    
+				    else {
+					    comp_status2 = true;
+				    }
+				    check = false; 
+			    }
+
+			    else {
+				    if (check == false) {
+					    cout << "hi" << endl;
+					    cout << tasks.front() << endl;
+					    c = in.toChar(tasks.front());
+					    ex.execute(c, comp_status2);
+					    tasks.pop();
+				    }
+
+				    else {
+					    cout << "hi4" << endl;
+					    cout << tasks.front() << endl;
+					    c = in.toChar(tasks.front());
+					    ex.execute(c, comp_status3);
+					    tasks.pop();
+				    }
+			    }
+		    }
+
+		    if (comp_status2 == false) {
+			    comp_status = false;
+		    }
+
+		    else {
+			    comp_status = true;
+		    }
+	    }
+
 		    
 
 
@@ -130,7 +200,8 @@ int main() {
             }
 
             // task was not a connector, and therefore a command 
-            else { 
+            else {
+		   cout << tasks.front() << endl; 
                 c = in.toChar(tasks.front());
                 ex.execute(c, comp_status);
 	            tasks.pop();
