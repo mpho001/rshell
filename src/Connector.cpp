@@ -23,6 +23,7 @@ void Connector::amp(queue<string>& q, bool status) {
             }
 
             else if (q.front() == "(") {
+                clearStack();
                 par.push("(");
                 q.pop();
                 popPar(q);
@@ -52,6 +53,13 @@ void Connector::orr(queue<string>& q, bool status) {
                 if (!q.empty() && q.front() == "]") {
                     q.pop();
                 }
+            }
+
+            else if (q.front() == "(") {
+                clearStack();
+                par.push("(");
+                q.pop();
+                popPar(q);
             }
 
             else if (!isCon(q.front())) {
