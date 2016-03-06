@@ -291,7 +291,8 @@ queue<string> Input::Parse() {
     
     // if no more connectors were detected
     if (end && paren) {
-        if (cmd.at(cmd.size() - 1) == ')') {
+        cout << "problem" << endl;
+        if (!cmd.empty() && cmd.at(cmd.size() - 1) == ')') {
             cmd.erase(cmd.size()-1);
             semicolon(tasks, cmd);
             tasks.push(")");
