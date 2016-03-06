@@ -23,21 +23,21 @@ int main() {
         // exit(0);
         tasks = in.Parse();
 
-         cout << "size: " << tasks.size() << endl;
+        cout << "size: " << tasks.size() << endl;
 
         // while (tasks.size() != 0) {
-          //   cout << tasks.front() << endl;
-            // tasks.pop();
+        //     cout << tasks.front() << endl;
+        //     tasks.pop();
         // }
 
         // exit(0);
         
         // bool determines whether command was successful
         bool comp_status = true;
-	bool comp_status2 = false;
-	bool comp_status3 = false;
-	bool check = false;
-	Connector con;
+	    bool comp_status2 = false;
+	    bool comp_status3 = false;
+	    bool check = false;
+	    Connector con;
         char** c;
 	    // int num = 0;
         Execute ex;
@@ -89,11 +89,13 @@ int main() {
 			        if(tasks.size() != 0) {
 					if (tasks.front() == "test") {
 					       	// delete all of test 
-						   while (tasks.size() != 0 && tasks.front() != "&&" && tasks.front() != "||" && tasks.front() != ";") { 
+						   while (tasks.size() != 0 && tasks.front() != "&&" && 
+                               tasks.front() != "||" && tasks.front() != ";") { 
 							   tasks.pop();
 						   }
 					}
-					else if (tasks.front() != "&&" || tasks.front() != "||" || tasks.front() != ";") {
+					else if (tasks.front() != "&&" || tasks.front() != "||" ||
+                            tasks.front() != ";") {
 				 	        tasks.pop();
 			  	        }
 		  	        }   
@@ -201,7 +203,7 @@ int main() {
 
             // task was not a connector, and therefore a command 
             else {
-		   cout << tasks.front() << endl; 
+		   // cout << tasks.front() << endl; 
                 c = in.toChar(tasks.front());
                 ex.execute(c, comp_status);
 	            tasks.pop();

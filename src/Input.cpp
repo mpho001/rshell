@@ -176,46 +176,50 @@ queue<string> Input::Parse() {
 
 
         
-	// would see if the first char of token is 
-	// ( then would push ( delete it from
-	// the token then push the actual token in
-	// would set paren to true letting 
-	// it know that there is a closing
-	// paren to look for
+	    // would see if the first char of token is 
+	    // ( then would push ( delete it from
+	    // the token then push the actual token in
+	    // would set paren to true letting 
+	    // it know that there is a closing
+	    // paren to look for
 
-	else if (token.at(0) == '(') {
-	    paren = true;
-    	tasks.push("(");
-	    token.erase(0, 1);
-	    // tasks.push(token);
-        if (cmd.empty()) {
-            cmd = token;
-        }
-        else {
-            cmd = " " + token;
-        }
-        end = false;
-        con = false;
-	}
+	    else if (token.at(0) == '(') {
+            while (token.at(0) == '(') {
+	            paren = true;
+    	        tasks.push("(");
+	            token.erase(0, 1);
+	            // tasks.push(token);
+                if (cmd.empty()) {
+                    cmd = token;
+                }
+                else {
+                    cmd = " " + token;
+                }
+            }
+            end = false;
+            con = false;
+	    }
 
-	// would check to see if paren is true 
-	// and would see is the last char in
-	// token is ) then would erase ) from token
-	// push the token in push the 
-	// ) in and make paren false again
-	// so that it know the braket is closed 
+	    // would check to see if paren is true 
+	    // and would see is the last char in
+	    // token is ) then would erase ) from token
+	    // push the token in push the 
+	    // ) in and make paren false again
+	    // so that it know the braket is closed 
 	    else if (paren == true && token.at(token.size() - 1) == ')') {
-    	    token.erase(token.size()-1);
-            if (cmd.empty()) {
-                tasks.push(token);
+            while (token.at(token.size() - 1) == ')') {
+                token.erase(token.size()-1);
+                if (cmd.empty()) {
+                    tasks.push(token);
+                }
+                else {
+                    tasks.push(cmd + " " + token);
+                    cmd.clear();
+                }
+	            // tasks.push(token);
+	            tasks.push(")");
             }
-            else {
-                tasks.push(cmd + " " + token);
-                cmd.clear();
-            }
-	        // tasks.push(token);
-	        tasks.push(")");
-	        paren = false;
+	        // paren = false;
             end = false;
             con = false;
 	    }	
