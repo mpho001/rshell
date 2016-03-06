@@ -35,7 +35,7 @@ int main() {
         // bool determines whether command was successful
         bool comp_status = true;
         char** c;
-	int num = 0;
+	    // int num = 0;
         Execute ex;
 
         // TEST STUFF
@@ -119,8 +119,12 @@ int main() {
             // the user wants to test
             else if (tasks.front() == "test" || tasks.front() == "[") {
                 // pops "test"
+                bool brack = false;
+                if (tasks.front() == "[") {
+                    brack = true;
+                }
                 tasks.pop();
-                test.run(tasks, comp_status);
+                test.run(tasks, comp_status, brack);
             }
 
             // task was not a connector, and therefore a command 

@@ -109,7 +109,7 @@ queue<string> Input::Parse() {
     // if a connector was just detected
     bool con = false;
     // if there is a parentheses
-    bool paren = false;
+    // bool paren = false;
     bool tested = false;
 
     // ignores ' '
