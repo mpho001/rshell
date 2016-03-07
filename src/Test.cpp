@@ -2,6 +2,7 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <unistd.h>
+#include <sstream>
 #include "Shell.h"
 
 using namespace std;
@@ -272,4 +273,15 @@ void Test::run(queue<string>& q, bool& worked, bool brack) {
         }
     }
 
+}
+
+queue<string> Test::parseTest(string testStr) {
+    istringstream iss(testStr);
+    string token;
+    queue<string> tasks;
+    
+    while (getline(iss, token, ' ')) {
+        tasks.push(token);
+    }
+    return tasks;
 }

@@ -40,6 +40,7 @@ class Test: public Shell {
         bool exists(const char* s);
         bool isReg(const char* s);
         bool isDir(const char* s);
+        queue<string> parseTest(string testStr);
         // is con will see if it's a connector
         // bool isCon(string str);
         void run(queue<string>& q, bool& worked, bool brack);
