@@ -91,3 +91,28 @@ void Connector::popPar(queue<string>& q) {
         }
     }
 }
+
+void Connector::balance(queue<string> q, bool& yes) {
+	stack<string> balanced;
+	while (q.size() != 0) {
+		if (q.front() == "(") {
+			balanced.push("(");
+		}
+		else if (q.front() == ")") {
+			if (balanced.empty()) {
+				yes = false;
+				return;
+			}
+			else {
+				balanced.pop();
+			}
+		}
+		q.pop();
+	}
+
+	if (balanced.empty()) {
+		yes = true;
+	}
+}
+
+
