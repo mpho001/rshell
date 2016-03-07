@@ -21,7 +21,7 @@ int main() {
         tasks = in.Parse();
 
         // bool determines whether command was successful
-            bool comp_status = true;
+        bool comp_status = true;
 	    bool comp_status2 = true;
 	    bool comp_status3 = true;
 	    bool comp_status4 = true;
@@ -33,19 +33,19 @@ int main() {
 	    bool comp_status10 = true;
 	    int hash = -1;
 	    Connector con;
-            char** c;
-            Execute ex;
+        char** c;
+        Execute ex;
 
-            // TEST STUFF
-            Test test;
+        // TEST STUFF
+        Test test;
 
 
         while (tasks.size() != 0) {
             // if at any point the user has exit
-	    if (tasks.front() == "exit") {
+	        if (tasks.front() == "exit") {
 		    	cout << "You have exited shell." << endl;
-			exit(0);
-	    }
+			    exit(0);
+	        }
 
             //------------------------------------------------------------------
 
@@ -431,6 +431,16 @@ int main() {
                     brack = true;
                 }
                 tasks.pop();
+                test.run(tasks, comp_status, brack);
+            }
+
+            else if ( tasks.front().size() > 3 && (tasks.front().substr(0, 3) == "test" ||
+                    tasks.front().at(0) == '[') ) {
+                bool brack = false;
+                if (tasks.front().at(0) == '[') {
+                    brack = true;
+                }
+                queue<string> a = test.parseTest(tasks.front());
                 test.run(tasks, comp_status, brack);
             }
 
