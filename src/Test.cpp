@@ -283,5 +283,6 @@ queue<string> Test::parseTest(string testStr) {
     while (getline(iss, token, ' ')) {
         tasks.push(token);
     }
+
     return tasks;
 }
