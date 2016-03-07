@@ -50,6 +50,9 @@ int main() {
             //------------------------------------------------------------------
 
             else if (tasks.front() == "&&") {
+		        // to see if
+			// there is a connector
+			// before the parentheses
 		        hash = 0;
 			con.amp(tasks, comp_status);
             }
@@ -58,26 +61,35 @@ int main() {
 
 
             else if (tasks.front() == "||") {
-			    hash = 0;
-			    con.orr(tasks, comp_status);
-	        }
+		        // to see if
+			// there is a connector
+			// before the paren
+		    	hash = 0;
+			con.orr(tasks, comp_status);
+	    }
             
             // simply pop the semicolon and continue looping
 	        else if (tasks.front() == ";") {
-		        tasks.pop();
+		        hash = 0;
+			tasks.pop();
 
 	        }
 
 	    //------------------------------------------------------------------
 	    
 	    else if (tasks.front() == "(") {
-		    if (hash == 1) {
+		    //checks to see if there is a
+		    //connector before the parentheses
+		    if (hash == -1) {
 			    perror("no connector before (");
 			    break;
 		    }
 
 		    bool bal;
 		    
+		    //to see if there are an
+		    //equal amount of
+		    //beg and end parentheses 
 		    con.balance(tasks, bal);
 		    if (bal == false) {
 			    perror("parentheses not balanced");
@@ -263,6 +275,9 @@ int main() {
 			    }
 			    
 			    else {
+				    // checks if front is test then executes test 
+				    // specifically, or just plain executes
+				    // according to size
 				    if (num == 9) {
 					    if (tasks.front() == "test" || tasks.front() == "[") {
 						    bool brack = false;
@@ -438,7 +453,6 @@ int main() {
             else {
 		    c = in.toChar(tasks.front());
 		    ex.execute(c, comp_status);
-	            hash = 1;
 	    	    tasks.pop();
 	        }
 	}
