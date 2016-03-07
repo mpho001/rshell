@@ -157,16 +157,22 @@ int main() {
 		    // gets rid of (
 	//	    cout << "entered ( else if statement" << endl;
 	//	    cout << comp_status << endl;
-		    if (hash == 1)
-		    {
+		    if (hash == 1) {
 			    perror("no connector before (");
-			    exit(0);
+			    break;
 		    }
+
+		    bool bal;
+		    
+		    con.balance(tasks, bal);
+		    if (bal == false) {
+			    perror("parentheses not balanced");
+			    break;
+		    }
+		    
 		    tasks.pop();
 		    int num = 1;
 		    while (num != 0) {
-	//		    cout << "entered the ( while statement" << endl;
-			  //  cout << tasks.front() << endl;
 			    if (tasks.front() == "&&") {
 				   // if num equals one meaning
 				   // if we are inside one paren the single
@@ -212,10 +218,18 @@ int main() {
 			    }
 
 			    else if (tasks.front() == "||") {
+				    // if num is 1 then comp 2
+				    // gets sent to orr
+				    // cause thats just a single
+				    // parentheses
 				    if (num == 1) {
 					    con.orr(tasks, comp_status2);
 				    }
 
+				    // if num is 2 then comp 3
+				    // gets sent to orr
+				    // cause thats just a double
+				    // parentheses
 				    else if (num == 2) {
 					    con.orr(tasks, comp_status3);
 				    }
@@ -254,7 +268,6 @@ int main() {
 			    }
 			    
 			    else if (tasks.front() == "(") {
-	//			    cout << "entered 2nd (" << endl;
 				    tasks.pop();
 				    num++;
 			    }
@@ -262,6 +275,12 @@ int main() {
 			    else if (tasks.front() == ")") {
 				    tasks.pop();
 
+				    // if num equals 9 then
+				    // we know comp stat 10
+				    // is used for comp stat 9
+				    // meaning that 9 paren in 
+				    // 8 paren so comp 10's status
+				    // determines comp 9's status
 				    if (num == 9) {
 					    if (comp_status10 == false) {
 						    comp_status9 = false;
@@ -330,50 +349,49 @@ int main() {
 			    }
 			    
 			    else {
-
 				    if (num == 9) {
-	//				    cout << "little exec2" << endl;
-                        if (tasks.front() == "test" || tasks.front() == "[") {
-                            bool brack = false;
-                            if (tasks.front() == "[") {
-                                brack = true;
-                            }
-                            tasks.pop();
-                            test.run(tasks, comp_status10, brack); 
-                        }
-                        else {
-					        c = in.toChar(tasks.front());
-					        ex.execute(c, comp_status10);
-					        tasks.pop();
-                        }
+					    if (tasks.front() == "test" || tasks.front() == "[") {
+						    bool brack = false;
+						    if (tasks.front() == "[") {
+							    brack = true;
+						    }
+						    tasks.pop();
+						    test.run(tasks, comp_status10, brack); 
+					    }
+					    
+					    else { 
+						    c = in.toChar(tasks.front());
+						    ex.execute(c, comp_status10);
+						    tasks.pop();
+					    }
 				    }
+				    
 				    else if (num == 8) {
-	//				    cout << "little exec2" << endl;
-                        if (tasks.front() == "test" || tasks.front() == "[") {
-                            bool brack = false;
-                            if (tasks.front() == "[") {
-                                brack = true;
-                            }
-                            tasks.pop();
-                            test.run(tasks, comp_status9, brack); 
-                        }
-                        else {
-					        c = in.toChar(tasks.front());
-					        ex.execute(c, comp_status9);
-					        tasks.pop();
-                        } 
+					    if (tasks.front() == "test" || tasks.front() == "[") {
+						    bool brack = false;
+						    if (tasks.front() == "[") {
+							    brack = true;
+						    }
+						    tasks.pop();
+						    test.run(tasks, comp_status9, brack);
+					    }
+					    else {
+						    c = in.toChar(tasks.front());
+						    ex.execute(c, comp_status9);
+						    tasks.pop();
+					    } 
 				    }
+				    
 				    else if (num == 7) {
-	//				    cout << "little exec2" << endl;
-                        if (tasks.front() == "test" || tasks.front() == "[") {
-                            bool brack = false;
-                            if (tasks.front() == "[") {
-                                brack = true;
-                            }
-                            tasks.pop();
-                            test.run(tasks, comp_status8, brack); 
-                        }
-                        else {
+					    if (tasks.front() == "test" || tasks.front() == "[") {
+						    bool brack = false;
+						    if (tasks.front() == "[") {
+							    brack = true;
+						    }
+						    tasks.pop();
+						    test.run(tasks, comp_status8, brack); 
+					    }
+					    else {
 					        c = in.toChar(tasks.front());
 					        ex.execute(c, comp_status8);
 					        tasks.pop();
@@ -477,14 +495,6 @@ int main() {
                         }
 				    }
 			    }
-			    
-			    if (tasks.size() == 0)
-			    {
-				    // perror("not enough parentheses");
-				    // exit(0);
-                    break;
-			    }
-
 
 		    }
 
