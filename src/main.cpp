@@ -14,6 +14,7 @@ int main() {
     Input in;
     queue<string> tasks;
     
+
     // to exit while loop, user must type exit 
     while(1) {
 
@@ -80,7 +81,7 @@ int main() {
 	    else if (tasks.front() == "(") {
 		    //checks to see if there is a
 		    //connector before the parentheses
-		    if (hash == -1) {
+		    if (hash == 1) {
 			    perror("no connector before (");
 			    break;
 		    }
@@ -441,7 +442,7 @@ int main() {
             // the user wants to test
             else if (tasks.front() == "test" || tasks.front() == "[") {
                 // pops "test"
-                bool brack = false;
+		bool brack = false;
                 if (tasks.front() == "[") {
                     brack = true;
                 }
@@ -449,18 +450,18 @@ int main() {
                 test.run(tasks, comp_status, brack);
             }
 
-            else if ( tasks.front().size() > 3 && (tasks.front().substr(0, 3) == "test" ||
-                    tasks.front().at(0) == '[') ) {
-                bool brack = false;
-                if (tasks.front().at(0) == '[') {
-                    brack = true;
-                }
-                queue<string> a = test.parseTest(tasks.front());
-                test.run(tasks, comp_status, brack);
+            else if ( tasks.front().size() > 3 && (tasks.front().substr(0, 3) == "test" || tasks.front().at(0) == '[') ) {
+		    bool brack = false;
+                    if (tasks.front().at(0) == '[') {
+			    brack = true;
+		    }
+		    queue<string> a = test.parseTest(tasks.front());
+		    test.run(tasks, comp_status, brack);
             }
 
             // task was not a connector, and therefore a command 
             else {
+		    hash = 1;
 		    c = in.toChar(tasks.front());
 		    ex.execute(c, comp_status);
 	    	    tasks.pop();
