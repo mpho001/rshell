@@ -18,22 +18,10 @@ int main() {
     while(1) {
 
         in.getInput();
-        // bool test = in.isTest();
-        // cout << "test: " << test << endl;
-        // exit(0);
         tasks = in.Parse();
 
-        // cout << "size: " << tasks.size() << endl;
-
-        // while (tasks.size() != 0) {
-        //     cout << tasks.front() << endl;
-        //     tasks.pop();
-        // }
-
-        // exit(0);
-        
         // bool determines whether command was successful
-        bool comp_status = true;
+            bool comp_status = true;
 	    bool comp_status2 = true;
 	    bool comp_status3 = true;
 	    bool comp_status4 = true;
@@ -44,105 +32,34 @@ int main() {
 	    bool comp_status9 = true;
 	    bool comp_status10 = true;
 	    int hash = -1;
-        //	bool check = false;
 	    Connector con;
-        char** c;
-	    // int num = 0;
-        Execute ex;
+            char** c;
+            Execute ex;
 
-        // TEST STUFF
-        Test test;
+            // TEST STUFF
+            Test test;
 
 
         while (tasks.size() != 0) {
-            // cout << tasks.front() << " check" << endl;
             // if at any point the user has exit
-            if (tasks.front() == "exit") {
-                cout << "You have exited shell." << endl;
-                exit(0);
-            }
+	    if (tasks.front() == "exit") {
+		    	cout << "You have exited shell." << endl;
+			exit(0);
+	    }
 
             //------------------------------------------------------------------
 
             else if (tasks.front() == "&&") {
-	            // tasks.pop(); //gets rid of the &&
-                // if the command before this one does returns F,then dont do
-                // //the next command
 		        hash = 0;
-		        //if(comp_status == false) {
-		        //// so the && connector should have already been deleted,
-                //// this is a while loop to
-                //// delete the next commands so that they wont run if
-                //// the command before fails  
-		        //    if(tasks.size() != 0) {
-                //        if (tasks.front() == "test") {
-                //            // delete all of test
-                //            while (tasks.size() != 0 && tasks.front() != "&&" &&
-                //                tasks.front() != "||" && tasks.front() != ";") {
-                //                tasks.pop();
-                //            }
-                //        } 
-                //        else if(tasks.front() != "&&" || tasks.front() != "||" 
-                //                || tasks.front() != ";") {
-				//            if (tasks.front() == "(") {
-				//	            int count = 1;
-				//	            tasks.pop();
-				//	            while (count != 0) {
-				//		            if (tasks.front() == "(") {
-				//			            count++;
-				//		            }
-				//		            else if (tasks.front() == ")") {
-				//			            count = count - 1;
-				//		            }
-				//		            // tasks.pop();
-				//	            }
-				//            }   
-                //            tasks.pop();
-			    //        }
-		        //    }
-	            //}
-                con.amp(tasks, comp_status);
+			con.amp(tasks, comp_status);
             }
 
             //------------------------------------------------------------------
 
 
             else if (tasks.front() == "||") {
-		        // tasks.pop();  // gets rid of the || 
-		       // cout << tasks.front() << endl;
 			    hash = 0;
-			    //if(comp_status == true) {
-			    //    if(tasks.size() != 0) {
-				//	    if (tasks.front() == "test") {
-				//	       	// delete all of test 
-				//		   while (tasks.size() != 0 && tasks.front() != "&&" && 
-                //             tasks.front() != "||" && tasks.front() != ";") { 
-				//			   tasks.pop();
-				//		   }
-				//	}
-
-				//	else if (tasks.front() != "&&" || tasks.front() != "||" ||
-                //            tasks.front() != ";") {
-				// 	        if (tasks.front() == "(") {
-				//			    int count = 1;
-				//			    tasks.pop();
-				//			    while (count != 0) {
-				//				    if (tasks.front() == "(") {
-				//					    count++;
-				//				    }
-				//				    else if (tasks.front() == ")") {
-				//					    count = count - 1;
-				//				    }
-				//				    tasks.pop();
-				//		        }
-			  	//            }
-                //            if (tasks.size() != 0) {
-                //                tasks.pop();
-                //            }
-		  	    //        }      
-		        //    }
-	            //}
-                con.orr(tasks, comp_status);
+			    con.orr(tasks, comp_status);
 	        }
             
             // simply pop the semicolon and continue looping
@@ -154,9 +71,6 @@ int main() {
 	    //------------------------------------------------------------------
 	    
 	    else if (tasks.front() == "(") {
-		    // gets rid of (
-	//	    cout << "entered ( else if statement" << endl;
-	//	    cout << comp_status << endl;
 		    if (hash == 1) {
 			    perror("no connector before (");
 			    break;
@@ -392,110 +306,108 @@ int main() {
 						    test.run(tasks, comp_status8, brack); 
 					    }
 					    else {
-					        c = in.toChar(tasks.front());
-					        ex.execute(c, comp_status8);
-					        tasks.pop();
-                        } 
+						    c = in.toChar(tasks.front());
+						    ex.execute(c, comp_status8);
+						    tasks.pop();
+					    } 
 				    }
+				    
 				    else if (num == 6) {
-	//				    cout << "little exec2" << endl;
-                        if (tasks.front() == "test" || tasks.front() == "[") {
-                            bool brack = false;
-                            if (tasks.front() == "[") {
-                                brack = true;
-                            }
-                            tasks.pop();
-                            test.run(tasks, comp_status7, brack); 
-                        }
-                        else {
-					        c = in.toChar(tasks.front());
-					        ex.execute(c, comp_status7);
-					        tasks.pop();
-                        } 
+					    if (tasks.front() == "test" || tasks.front() == "[") {
+						    bool brack = false;
+						    if (tasks.front() == "[") {
+							    brack = true;
+						    }
+						    tasks.pop();
+						    test.run(tasks, comp_status7, brack); 
+					    }
+					    else {
+						    c = in.toChar(tasks.front());
+					            ex.execute(c, comp_status7);
+					            tasks.pop();
+					    } 
 				    }
+				    
 				    else if (num == 5) {
-	//				    cout << "little exec2" << endl;
-                        if (tasks.front() == "test" || tasks.front() == "[") {
-                            bool brack = false;
-                            if (tasks.front() == "[") {
-                                brack = true;
-                            }
-                            tasks.pop();
-                            test.run(tasks, comp_status6, brack); 
-                        }
-                        else {
-					        c = in.toChar(tasks.front());
-					        ex.execute(c, comp_status6);
-					        tasks.pop();
-                        } 
+					    if (tasks.front() == "test" || tasks.front() == "[") {
+						    bool brack = false;
+						    if (tasks.front() == "[") {
+							    brack = true;
+						    }
+						    tasks.pop();
+						    test.run(tasks, comp_status6, brack); 
+					    }
+					    else {
+						    c = in.toChar(tasks.front());
+					            ex.execute(c, comp_status6);
+					            tasks.pop();
+					    }
 				    }
+				    
 				    else if (num == 4) {
-	//				    cout << "little exec2" << endl;
-                        if (tasks.front() == "test" || tasks.front() == "[") {
-                            bool brack = false;
-                            if (tasks.front() == "[") {
-                                brack = true;
-                            }
-                            tasks.pop();
-                            test.run(tasks, comp_status5, brack); 
-                        }
-                        else {
-					        c = in.toChar(tasks.front());
-					        ex.execute(c, comp_status5);
-					        tasks.pop();
-                        }
+					    if (tasks.front() == "test" || tasks.front() == "[") {
+						    bool brack = false;
+						    if (tasks.front() == "[") {
+							    brack = true;
+						    }
+						    tasks.pop();
+						    test.run(tasks, comp_status5, brack); 
+					    }
+					    else {
+						    c = in.toChar(tasks.front());
+					            ex.execute(c, comp_status5);
+					            tasks.pop();
+					    }
 				    }
+				    
 				    else if (num == 3) {
-	//				    cout << "little exec2" << endl;
-                        if (tasks.front() == "test" || tasks.front() == "[") {
-                            bool brack = false;
-                            if (tasks.front() == "[") {
-                                brack = true;
-                            }
-                            tasks.pop();
-                            test.run(tasks, comp_status4, brack); 
-                        }
-                        else {
-					        c = in.toChar(tasks.front());
-					        ex.execute(c, comp_status4);
-					        tasks.pop();
-                        }
+					    if (tasks.front() == "test" || tasks.front() == "[") {
+						    bool brack = false;
+						    if (tasks.front() == "[") {
+							    brack = true;
+						    }
+						    tasks.pop();
+						    test.run(tasks, comp_status4, brack); 
+					    }
+					    else {
+						    c = in.toChar(tasks.front());
+					            ex.execute(c, comp_status4);
+					            tasks.pop();
+					    }
 				    }
+				    
 				    else if (num == 2) {
-	//				    cout << "little exec2" << endl;
-                        if (tasks.front() == "test" || tasks.front() == "[") {
-                            bool brack = false;
-                            if (tasks.front() == "[") {
-                                brack = true;
-                            }
-                            tasks.pop();
-                            test.run(tasks, comp_status3, brack); 
-                        }
-                        else {
-					        c = in.toChar(tasks.front());
-					        ex.execute(c, comp_status3);
-					        tasks.pop();
-                        }
+					    if (tasks.front() == "test" || tasks.front() == "[") {
+						    bool brack = false;
+						    if (tasks.front() == "[") {
+							    brack = true;
+						    }
+						    tasks.pop();
+						    test.run(tasks, comp_status3, brack); 
+					    }
+					    else {
+						    c = in.toChar(tasks.front());
+					            ex.execute(c, comp_status3);
+					            tasks.pop();
+					    }
 				    }
 
 				    else if (num == 1) {
-                        // cout << "little exec1" << endl;
-                        if (tasks.front() == "test" || tasks.front() == "[") {
-                            bool brack = false;
-                            if (tasks.front() == "[") {
-                                brack = true;
-                            }
-                            tasks.pop();
-                            test.run(tasks, comp_status2, brack); 
-                        }
-                        else {
-					        c = in.toChar(tasks.front());
-					        ex.execute(c, comp_status2);
-					        tasks.pop();
-                        }
+					    if (tasks.front() == "test" || tasks.front() == "[") {
+						    bool brack = false;
+						    if (tasks.front() == "[") {
+							    brack = true;
+						    }
+						    tasks.pop();
+						    test.run(tasks, comp_status2, brack); 
+					    }
+					    else {
+						    c = in.toChar(tasks.front());
+						    ex.execute(c, comp_status2);
+						    tasks.pop();
+					    }
 				    }
 			    }
-
 		    }
 
 		    if (comp_status2 == false) {
@@ -505,13 +417,7 @@ int main() {
 		    else {
 			    comp_status = true;
 		    }
-
-            // cout << comp_status << endl;
-		   
 	    }
-
-		    
-
 
 
             //-----------------------------------------------------------------
@@ -530,16 +436,13 @@ int main() {
 
             // task was not a connector, and therefore a command 
             else {
-                c = in.toChar(tasks.front());
-                ex.execute(c, comp_status);
+		    c = in.toChar(tasks.front());
+		    ex.execute(c, comp_status);
 	            hash = 1;
 	    	    tasks.pop();
 	        }
-            
-        }
-    cout << flush;
-
+	}
+	cout << flush;
     }
-
     return 0;
 }
