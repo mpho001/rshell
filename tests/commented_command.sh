@@ -14,3 +14,7 @@ echo date# "$$ random command" | ./a.out
 echo "date || ls || echo this #&& echo that" | ./a.out
 echo "echo hello || #echo world" | ./a.out
 echo "git bra && lsss #|| echo hey" | ./a.out
+echo "# no string at all" | ./a.out
+echo "#test -e main.cpp" | ./a.out
+echo "test #-f main.cpp" | ./a.out
+echo "[ -e #]" | ./a.out
