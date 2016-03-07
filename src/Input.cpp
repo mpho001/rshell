@@ -110,7 +110,7 @@ queue<string> Input::Parse() {
     bool con = false;
     // if there is a parentheses
     bool paren = false;
-    bool tested = false;
+    // bool tested = false;
 
     // ignores ' '
     while (getline(iss, token, ' ')) {
@@ -137,7 +137,7 @@ queue<string> Input::Parse() {
                 }
             }
             end = false;
-            tested = true;
+            // tested = true;
         }        
 
         // removed else if
@@ -155,7 +155,7 @@ queue<string> Input::Parse() {
             if (token == "(") {paren = true;}
             end = false;
             con = true;
-            tested = false;
+            // tested = false;
         }
         
         // if you see [, keep reading til you see ]
@@ -176,7 +176,7 @@ queue<string> Input::Parse() {
             }
             end = false;
             con = false;
-            tested = false;
+            // tested = false;
         }
 
 
@@ -198,7 +198,12 @@ queue<string> Input::Parse() {
                 if (cmd.empty() && !token.empty() && token.at(0) != '(') {
                     if (token.at(token.size()-1) == ';') {
                         token.erase(token.size()-1);
-                        tasks.push(token);
+                        if (!token.empty() && token.at(token.size()-1) == ')') {
+                            token.erase(token.size()-1);
+                            tasks.push(token);
+                            tasks.push(")");
+                        }
+                        else {tasks.push(token);}
                         tasks.push(";");
                     }
                     else {
@@ -220,7 +225,8 @@ queue<string> Input::Parse() {
 	    // push the token in push the 
 	    // ) in and make paren false again
 	    // so that it know the braket is closed 
-	    else if (paren == true && token.at(token.size() - 1) == ')') {
+        // removed if paren == true
+	    else if (token.at(token.size() - 1) == ')') {
             int count = 0;
             paren = false;
             while (token.at(token.size() - 1) == ')') {
@@ -258,6 +264,20 @@ queue<string> Input::Parse() {
             // cout << "token: " << token << token.size() << endl;
             if (token.size() != 0 && token.at(token.size() - 1) == ';') {
                 token.erase(token.size()-1);
+
+                bool cloP = false;
+                if (!token.empty() && token.at(token.size()-1 == ')')) {
+                    cout << "entered" << endl;
+                    if (token.at(token.size()-1) != ')') {
+                        // cout << "pleas" << endl;
+                    }
+                    else {
+                        token.erase(token.size()-1);
+                        // tasks.push(")");
+                        cloP = true;
+                    }
+                }
+
                 if (cmd.empty()) {
                     tasks.push(token);
                 }
@@ -265,6 +285,7 @@ queue<string> Input::Parse() {
                     tasks.push(cmd + " " + token);
                     cmd.clear();
                 }
+                if (cloP) {tasks.push(")");}
                 tasks.push(";");
                 end = false;
             }
@@ -283,7 +304,7 @@ queue<string> Input::Parse() {
                 end = true;
             }
             con = false;
-            tested = false;
+            // tested = false;
         }
 
         start = false;
@@ -291,7 +312,6 @@ queue<string> Input::Parse() {
     
     // if no more connectors were detected
     if (end && paren) {
-        cout << "problem" << endl;
         if (!cmd.empty() && cmd.at(cmd.size() - 1) == ')') {
             cmd.erase(cmd.size()-1);
             semicolon(tasks, cmd);
