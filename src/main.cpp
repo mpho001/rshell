@@ -287,6 +287,18 @@ int main() {
 						    tasks.pop();
 						    test.run(tasks, comp_status10, brack); 
 					    }
+                       else if ( tasks.front().size() > 3 && 
+                                (tasks.front().substr(0, 4) == 
+                                "test" || tasks.front().at(0) == '[') ) {
+                            bool brack = false;
+                            if (tasks.front().at(0) == '[') {
+                                brack = true;
+                            }
+                            queue<string> a = test.parseTest(tasks.front());
+                            a.pop();
+                            test.run(a, comp_status10, brack);
+                            tasks.pop();
+                        } 
 					    
 					    else { 
 						    c = in.toChar(tasks.front());
@@ -304,6 +316,18 @@ int main() {
 						    tasks.pop();
 						    test.run(tasks, comp_status9, brack);
 					    }
+                       else if ( tasks.front().size() > 3 && 
+                                (tasks.front().substr(0, 4) == 
+                                "test" || tasks.front().at(0) == '[') ) {
+                            bool brack = false;
+                            if (tasks.front().at(0) == '[') {
+                                brack = true;
+                            }
+                            queue<string> a = test.parseTest(tasks.front());
+                            a.pop();
+                            test.run(a, comp_status9, brack);
+                            tasks.pop();
+                        } 
 					    else {
 						    c = in.toChar(tasks.front());
 						    ex.execute(c, comp_status9);
@@ -320,6 +344,18 @@ int main() {
 						    tasks.pop();
 						    test.run(tasks, comp_status8, brack); 
 					    }
+                        else if ( tasks.front().size() > 3 && 
+                                (tasks.front().substr(0, 4) == 
+                                "test" || tasks.front().at(0) == '[') ) {
+                            bool brack = false;
+                            if (tasks.front().at(0) == '[') {
+                                brack = true;
+                            }
+                            queue<string> a = test.parseTest(tasks.front());
+                            a.pop();
+                            test.run(a, comp_status8, brack);
+                            tasks.pop();
+                        }
 					    else {
 						    c = in.toChar(tasks.front());
 						    ex.execute(c, comp_status8);
@@ -336,6 +372,18 @@ int main() {
 						    tasks.pop();
 						    test.run(tasks, comp_status7, brack); 
 					    }
+                       else if ( tasks.front().size() > 3 && 
+                                (tasks.front().substr(0, 4) == 
+                                "test" || tasks.front().at(0) == '[') ) {
+                            bool brack = false;
+                            if (tasks.front().at(0) == '[') {
+                                brack = true;
+                            }
+                            queue<string> a = test.parseTest(tasks.front());
+                            a.pop();
+                            test.run(a, comp_status7, brack);
+                            tasks.pop();
+                        } 
 					    else {
 						    c = in.toChar(tasks.front());
 					            ex.execute(c, comp_status7);
@@ -352,6 +400,18 @@ int main() {
 						    tasks.pop();
 						    test.run(tasks, comp_status6, brack); 
 					    }
+                        else if ( tasks.front().size() > 3 && 
+                                (tasks.front().substr(0, 4) == 
+                                "test" || tasks.front().at(0) == '[') ) {
+                            bool brack = false;
+                            if (tasks.front().at(0) == '[') {
+                                brack = true;
+                            }
+                            queue<string> a = test.parseTest(tasks.front());
+                            a.pop();
+                            test.run(a, comp_status6, brack);
+                            tasks.pop();
+                        }
 					    else {
 						    c = in.toChar(tasks.front());
 					            ex.execute(c, comp_status6);
@@ -368,6 +428,18 @@ int main() {
 						    tasks.pop();
 						    test.run(tasks, comp_status5, brack); 
 					    }
+                        else if ( tasks.front().size() > 3 && 
+                                (tasks.front().substr(0, 4) == 
+                                "test" || tasks.front().at(0) == '[') ) {
+                            bool brack = false;
+                            if (tasks.front().at(0) == '[') {
+                                brack = true;
+                            }
+                            queue<string> a = test.parseTest(tasks.front());
+                            a.pop();
+                            test.run(a, comp_status5, brack);
+                            tasks.pop();
+                        }
 					    else {
 						    c = in.toChar(tasks.front());
 					            ex.execute(c, comp_status5);
@@ -384,6 +456,18 @@ int main() {
 						    tasks.pop();
 						    test.run(tasks, comp_status4, brack); 
 					    }
+                        else if ( tasks.front().size() > 3 && 
+                                (tasks.front().substr(0, 4) == 
+                                "test" || tasks.front().at(0) == '[') ) {
+                            bool brack = false;
+                            if (tasks.front().at(0) == '[') {
+                                brack = true;
+                            }
+                            queue<string> a = test.parseTest(tasks.front());
+                            a.pop();
+                            test.run(a, comp_status4, brack);
+                            tasks.pop();
+                        }
 					    else {
 						    c = in.toChar(tasks.front());
 					            ex.execute(c, comp_status4);
@@ -400,6 +484,18 @@ int main() {
 						    tasks.pop();
 						    test.run(tasks, comp_status3, brack); 
 					    }
+                        else if ( tasks.front().size() > 3 && 
+                                (tasks.front().substr(0, 4) == 
+                                "test" || tasks.front().at(0) == '[') ) {
+                            bool brack = false;
+                            if (tasks.front().at(0) == '[') {
+                                brack = true;
+                            }
+                            queue<string> a = test.parseTest(tasks.front());
+                            a.pop();
+                            test.run(a, comp_status3, brack);
+                            tasks.pop();
+                        }
 					    else {
 						    c = in.toChar(tasks.front());
 					            ex.execute(c, comp_status3);
@@ -416,6 +512,18 @@ int main() {
 						    tasks.pop();
 						    test.run(tasks, comp_status2, brack); 
 					    }
+                        else if ( tasks.front().size() > 3 && 
+                                (tasks.front().substr(0, 4) == 
+                                "test" || tasks.front().at(0) == '[') ) {
+                            bool brack = false;
+                            if (tasks.front().at(0) == '[') {
+                                brack = true;
+                            }
+                            queue<string> a = test.parseTest(tasks.front());
+                            a.pop();
+                            test.run(a, comp_status2, brack);
+                            tasks.pop();
+                        }
 					    else {
 						    c = in.toChar(tasks.front());
 						    ex.execute(c, comp_status2);
@@ -446,16 +554,6 @@ int main() {
                     brack = true;
                 }
                 tasks.pop();
-                test.run(tasks, comp_status, brack);
-            }
-
-            else if ( tasks.front().size() > 3 && (tasks.front().substr(0, 3) == "test" ||
-                    tasks.front().at(0) == '[') ) {
-                bool brack = false;
-                if (tasks.front().at(0) == '[') {
-                    brack = true;
-                }
-                queue<string> a = test.parseTest(tasks.front());
                 test.run(tasks, comp_status, brack);
             }
 
