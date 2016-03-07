@@ -207,6 +207,7 @@ queue<string> Input::Parse() {
                         tasks.push(";");
                     }
                     else {
+                        // cout << "here" << endl;
                         cmd = token;
                     }
                 }
@@ -267,7 +268,7 @@ queue<string> Input::Parse() {
 
                 bool cloP = false;
                 if (!token.empty() && token.at(token.size()-1 == ')')) {
-                    cout << "entered" << endl;
+                    // cout << "entered" << endl;
                     if (token.at(token.size()-1) != ')') {
                         // cout << "pleas" << endl;
                     }
@@ -318,9 +319,11 @@ queue<string> Input::Parse() {
             tasks.push(")");
         }
     }
+
     else if (end) {
         tasks.push(cmd);
     }
+
 
     // check if last thing in task is a && or ||
     // if (token == "&&" || token == "||") {

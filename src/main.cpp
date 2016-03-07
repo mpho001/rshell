@@ -23,7 +23,7 @@ int main() {
         // exit(0);
         tasks = in.Parse();
 
-        cout << "size: " << tasks.size() << endl;
+        // cout << "size: " << tasks.size() << endl;
 
         // while (tasks.size() != 0) {
         //     cout << tasks.front() << endl;
@@ -65,82 +65,84 @@ int main() {
             //------------------------------------------------------------------
 
             else if (tasks.front() == "&&") {
-	            tasks.pop(); //gets rid of the &&
+	            // tasks.pop(); //gets rid of the &&
                 // if the command before this one does returns F,then dont do
                 // //the next command
 		        hash = 0;
-		        if(comp_status == false) {
-		        // so the && connector should have already been deleted,
-                // this is a while loop to
-                // delete the next commands so that they wont run if
-                // the command before fails  
-		            if(tasks.size() != 0) {
-                        if (tasks.front() == "test") {
-                            // delete all of test
-                            while (tasks.size() != 0 && tasks.front() != "&&" &&
-                                tasks.front() != "||" && tasks.front() != ";") {
-                                tasks.pop();
-                            }
-                        } 
-                        else if(tasks.front() != "&&" || tasks.front() != "||" 
-                                || tasks.front() != ";") {
-				            if (tasks.front() == "(") {
-					            int count = 1;
-					            tasks.pop();
-					            while (count != 0) {
-						            if (tasks.front() == "(") {
-							            count++;
-						            }
-						            else if (tasks.front() == ")") {
-							            count = count - 1;
-						            }
-						            // tasks.pop();
-					            }
-				            }   
-                            tasks.pop();
-			            }
-		            }
-	            }
+		        //if(comp_status == false) {
+		        //// so the && connector should have already been deleted,
+                //// this is a while loop to
+                //// delete the next commands so that they wont run if
+                //// the command before fails  
+		        //    if(tasks.size() != 0) {
+                //        if (tasks.front() == "test") {
+                //            // delete all of test
+                //            while (tasks.size() != 0 && tasks.front() != "&&" &&
+                //                tasks.front() != "||" && tasks.front() != ";") {
+                //                tasks.pop();
+                //            }
+                //        } 
+                //        else if(tasks.front() != "&&" || tasks.front() != "||" 
+                //                || tasks.front() != ";") {
+				//            if (tasks.front() == "(") {
+				//	            int count = 1;
+				//	            tasks.pop();
+				//	            while (count != 0) {
+				//		            if (tasks.front() == "(") {
+				//			            count++;
+				//		            }
+				//		            else if (tasks.front() == ")") {
+				//			            count = count - 1;
+				//		            }
+				//		            // tasks.pop();
+				//	            }
+				//            }   
+                //            tasks.pop();
+			    //        }
+		        //    }
+	            //}
+                con.amp(tasks, comp_status);
             }
 
             //------------------------------------------------------------------
 
 
             else if (tasks.front() == "||") {
-		        tasks.pop();  // gets rid of the || 
+		        // tasks.pop();  // gets rid of the || 
 		       // cout << tasks.front() << endl;
 			    hash = 0;
-			    if(comp_status == true) {
-			        if(tasks.size() != 0) {
-					    if (tasks.front() == "test") {
-					       	// delete all of test 
-						   while (tasks.size() != 0 && tasks.front() != "&&" && 
-                               tasks.front() != "||" && tasks.front() != ";") { 
-							   tasks.pop();
-						   }
-					}
+			    //if(comp_status == true) {
+			    //    if(tasks.size() != 0) {
+				//	    if (tasks.front() == "test") {
+				//	       	// delete all of test 
+				//		   while (tasks.size() != 0 && tasks.front() != "&&" && 
+                //             tasks.front() != "||" && tasks.front() != ";") { 
+				//			   tasks.pop();
+				//		   }
+				//	}
 
-					else if (tasks.front() != "&&" || tasks.front() != "||" ||
-                            tasks.front() != ";") {
-				 	        if (tasks.front() == "(") {
-							    int count = 1;
-							    tasks.pop();
-							    while (count != 0) {
-								    if (tasks.front() == "(") {
-									    count++;
-								    }
-								    else if (tasks.front() == ")") {
-									    count = count - 1;
-								    }
-								    tasks.pop();
-						        }
-			  	            }
-                            if (tasks.size() != 0) {
-                                tasks.pop();
-                            }
-		  	            }      
-		            }
-	            }
+				//	else if (tasks.front() != "&&" || tasks.front() != "||" ||
+                //            tasks.front() != ";") {
+				// 	        if (tasks.front() == "(") {
+				//			    int count = 1;
+				//			    tasks.pop();
+				//			    while (count != 0) {
+				//				    if (tasks.front() == "(") {
+				//					    count++;
+				//				    }
+				//				    else if (tasks.front() == ")") {
+				//					    count = count - 1;
+				//				    }
+				//				    tasks.pop();
+				//		        }
+			  	//            }
+                //            if (tasks.size() != 0) {
+                //                tasks.pop();
+                //            }
+		  	    //        }      
+		        //    }
+	            //}
+                con.orr(tasks, comp_status);
 	        }
             
             // simply pop the semicolon and continue looping
@@ -494,7 +496,7 @@ int main() {
 			    comp_status = true;
 		    }
 
-            cout << comp_status << endl;
+            // cout << comp_status << endl;
 		   
 	    }
 
